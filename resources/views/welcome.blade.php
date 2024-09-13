@@ -14,6 +14,7 @@
                 <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Login sebagai
                 </button>
+                {{-- dropdown menu --}}
                 <div class="dropdown-menu">
                     {{-- <a class="dropdown-item" href="{{ route('admin.login') }}">Admin</a> --}}
                     <a class="dropdown-item" href="{{ route('guru.login') }}">Guru</a>
@@ -24,6 +25,7 @@
                 <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Register sebagai
                 </button>
+                {{-- dropdown menu --}}
                 <div class="dropdown-menu">
                     {{-- <a class="dropdown-item" href="{{ route('admin.register') }}">Admin</a> --}}
                     <a class="dropdown-item" href="{{ route('guru.register') }}">Guru</a>
