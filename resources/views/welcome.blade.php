@@ -3,9 +3,17 @@
 <head>
     <title>Login and Register</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body, html {
+            height: 100%;
+        }
+        .center-container {
+            height: 100vh;
+        }
+    </style>
 </head>
 <body>
-<div class="container">
+<div class="container center-container d-flex flex-column justify-content-center">
     <h2 class="font-weight-bold">Four Tier Assasement</h2>
     <img src="{{ asset('images/bgawal.svg') }}" alt="Header Image" class="img-fluid w-100 rounded">
     <div class="row justify-content-center mt-4">
