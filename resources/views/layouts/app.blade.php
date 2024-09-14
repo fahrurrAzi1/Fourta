@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     
     <!-- skrip untuk vite -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
