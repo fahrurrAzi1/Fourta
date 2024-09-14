@@ -47,7 +47,7 @@
                 </section>
             @endif
 
-            <!-- konten utama halaman-->
+            <!-- konten utama halamn-->
             <section class="content">
                 <div class="container-fluid">
                     @yield('content')
