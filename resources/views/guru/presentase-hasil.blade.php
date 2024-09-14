@@ -17,13 +17,6 @@
                     <table id="presentaseTable" class="table table-bordered table-lg text-center w-100">
                         <thead class="bg-light breaks-word">
                             <tr>
-                                <th colspan="5" class="align-middle text-left">Nomor Soal</th>
-                                @for ($i = 1; $i <= 10; $i++)
-                                    <th colspan="5">{{ $i }}</th>
-                                @endfor
-                                <th colspan="3" rowspan="2" class="align-middle text-center=">Keterangan Akhir</th>
-                            </tr>
-                            <tr>
                                 <th colspan="5" class="align-middle text-left">Keterangan Skor</th>
                                 @for ($i = 1; $i <= 10; $i++)
                                     <th>Skor Jawaban</th>
@@ -31,6 +24,13 @@
                                     <th>Skor Alasan </th>
                                     <th>Skor Yakin Alasan</th>
                                     <th>Koreksi Guru</th>
+                                @endfor                                
+                                <th colspan="3" rowspan="2" class="align-middle text-center=">Keterangan Akhir</th>
+                            </tr>
+                            <tr>
+                                <th colspan="5" class="align-middle text-left">Nomor Soal</th>
+                                @for ($i = 1; $i <= 10; $i++)
+                                    <th colspan="5">{{ $i }}</th>
                                 @endfor
                             </tr>
                             <tr>
