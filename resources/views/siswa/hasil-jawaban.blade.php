@@ -24,7 +24,9 @@
                             <th class="align-middle text-center">Jenis</th>
                             <th class="align-middle text-center">Sekolah</th>
                             <th class="align-middle text-center">Kelas</th>
-                            <th class="align-middle text-center">Komentar</th>
+                            @for ($i = 1; $i <= 10; $i++)
+                                <th>Komentar Soal {{ $i }}</th>
+                            @endfor
                             <th class="align-middle text-center">Total Skor</th>
                             <th class="align-middle text-center">Kategori</th>
                         </thead>
@@ -98,7 +100,9 @@
                     { data: 'jenis', name: 'jenis' },
                     { data: 'sekolah', name: 'sekolah' },
                     { data: 'kelas', name: 'kelas' },
-                    { data: 'komentar', name: 'komentar' },
+                    @for ($i = 1; $i <= 10; $i++)
+                        { data: 'q{{ $i }}_komentar', name: 'q{{ $i }}_komentar' },
+                    @endfor
                     { data: 'skor_total', name: 'skor_total' },
                     { data: 'kategori_skor', name: 'kategori_skor' },
                 ],

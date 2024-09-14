@@ -19,7 +19,7 @@
                             <tr>
                                 <th colspan="5" class="align-middle text-left">Nomor Soal</th>
                                 @for ($i = 1; $i <= 10; $i++)
-                                    <th colspan="4">{{ $i }}</th>
+                                    <th colspan="5">{{ $i }}</th>
                                 @endfor
                                 <th colspan="3" rowspan="2" class="align-middle text-center=">Keterangan Akhir</th>
                             </tr>
@@ -30,6 +30,7 @@
                                     <th>Skor Yakin Jawaban</th>
                                     <th>Skor Alasan </th>
                                     <th>Skor Yakin Alasan</th>
+                                    <th>Koreksi Guru</th>
                                 @endfor
                             </tr>
                             <tr>
@@ -43,8 +44,8 @@
                                     <th>II</th>
                                     <th>III</th>
                                     <th>IV</th>
+                                    <th>Komentar</th>
                                 @endfor
-                                <th class="align-middle text-center">Komentar</th>
                                 <th class="align-middle text-center">Total Skor</th>
                                 <th class="align-middle text-center">Kategori</th>
                             </tr>
@@ -282,8 +283,8 @@
                         { data: 'q{{ $i }}_II', name: 'q{{ $i }}_II' },
                         { data: 'q{{ $i }}_III', name: 'q{{ $i }}_III' },
                         { data: 'q{{ $i }}_IV', name: 'q{{ $i }}_IV' },
+                        { data: 'q{{ $i }}_komentar', name: 'q{{ $i }}_komentar' },
                     @endfor
-                    { data: 'komentar', name: 'komentar' },
                     { data: 'skor_total', name: 'skor_total' },
                     { data: 'kategori_skor', name: 'kategori_skor' },
                 ],

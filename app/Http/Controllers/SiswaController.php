@@ -80,10 +80,75 @@ class SiswaController extends Controller
                 return $row->first()->jenis; 
 
             })
-            ->addColumn('komentar', function($row) {
-
-                return optional($row->first()->komentar)->isi_komentar; 
-
+            ->addColumn('q1_komentar', function($row) {
+                $firstItem = $row->where('id_soal', 1)->first();  
+                if ($firstItem && $firstItem->komentar) {
+                    return $firstItem->komentar->isi_komentar;  
+                }
+                return '';  
+            })
+            ->addColumn('q2_komentar', function($row) {
+                $firstItem = $row->where('id_soal', 2)->first();  
+                if ($firstItem && $firstItem->komentar) {
+                    return $firstItem->komentar->isi_komentar;  
+                }
+                return '';  
+            })
+            ->addColumn('q3_komentar', function($row) {
+                $firstItem = $row->where('id_soal', 3)->first();  
+                if ($firstItem && $firstItem->komentar) {
+                    return $firstItem->komentar->isi_komentar;  
+                }
+                return '';  
+            })
+            ->addColumn('q4_komentar', function($row) {
+                $firstItem = $row->where('id_soal', 4)->first();  
+                if ($firstItem && $firstItem->komentar) {
+                    return $firstItem->komentar->isi_komentar;  
+                }
+                return '';  
+            })
+            ->addColumn('q5_komentar', function($row) {
+                $firstItem = $row->where('id_soal', 5)->first();  
+                if ($firstItem && $firstItem->komentar) {
+                    return $firstItem->komentar->isi_komentar;  
+                }
+                return '';  
+            })
+            ->addColumn('q6_komentar', function($row) {
+                $firstItem = $row->where('id_soal', 6)->first();  
+                if ($firstItem && $firstItem->komentar) {
+                    return $firstItem->komentar->isi_komentar;  
+                }
+                return '';  
+            })
+            ->addColumn('q7_komentar', function($row) {
+                $firstItem = $row->where('id_soal', 7)->first();  
+                if ($firstItem && $firstItem->komentar) {
+                    return $firstItem->komentar->isi_komentar;  
+                }
+                return '';  
+            })
+            ->addColumn('q8_komentar', function($row) {
+                $firstItem = $row->where('id_soal', 8)->first();  
+                if ($firstItem && $firstItem->komentar) {
+                    return $firstItem->komentar->isi_komentar;  
+                }
+                return '';  
+            })
+            ->addColumn('q9_komentar', function($row) {
+                $firstItem = $row->where('id_soal', 9)->first();  
+                if ($firstItem && $firstItem->komentar) {
+                    return $firstItem->komentar->isi_komentar;  
+                }
+                return '';  
+            })
+            ->addColumn('q10_komentar', function($row) {
+                $firstItem = $row->where('id_soal', 10)->first();  
+                if ($firstItem && $firstItem->komentar) {
+                    return $firstItem->komentar->isi_komentar;  
+                }
+                return '';  
             })
             ->addColumn('sekolah',function($row){
                 return $row->first()->siswa->nama_sekolah;
