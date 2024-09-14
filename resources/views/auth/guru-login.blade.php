@@ -18,7 +18,13 @@
 
             <div class="col-lg-6 d-flex align-items-center justify-content-center">
                 <div class="container">
+                    
+                    <div class="text-center mb-4 d-lg-none">
+                        <img src="{{ asset('images/bgloginguru.svg') }}" alt="Login Image" class="img-fluid" style="max-width: 300px;">
+                    </div>
+                    
                     <h2 class="text-center mb-4">Guru Login</h2>
+
                     <form method="POST" action="{{ route('guru.login') }}">
                         @csrf
                         <div class="form-group">

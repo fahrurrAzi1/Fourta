@@ -18,6 +18,11 @@
 
             <div class="col-lg-6 d-flex align-items-center justify-content-center">
                 <div class="container">
+                    
+                    <div class="text-center mb-4 d-lg-none">
+                        <img src="{{ asset('images/bgregisterguru.svg') }}" alt="Register Image" class="img-fluid" style="max-width: 300px;">
+                    </div>
+
                     <h2 class="text-center mb-4">Guru Register</h2>
                     <form method="POST" action="{{ route('guru.register') }}">
                         @csrf
