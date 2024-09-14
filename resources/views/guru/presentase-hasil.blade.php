@@ -44,7 +44,7 @@
                                     <th>II</th>
                                     <th>III</th>
                                     <th>IV</th>
-                                    <th>Komentar</th>
+                                    <th>Komentar {{ $i }}</th>
                                 @endfor
                                 <th class="align-middle text-center">Total Skor</th>
                                 <th class="align-middle text-center">Kategori</th>
@@ -293,7 +293,7 @@
                     "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
                 buttons: [
                     {
-                        text: '<i class="fas fa-file-excel"></i>&nbsp;Excel',
+                        text: '<i class="fas fa-file-excel"></i>&nbsp;Excel: Detail',
                         className: 'btn btn-sm btn-outline-success',
                         titleAttr: 'Ekspor ke Excel',
                         action: async function (e, dt, button, config) {
@@ -302,7 +302,92 @@
                             const teacherData = await fetch(`/api/get-guru-data/${teacherId}`).then(response => response.json());
 
                             const tableData = dt.buttons.exportData({
-                                columns: [0, 1, 3, 4, 45, 46, 47]
+                                columns: [0, 1, 2, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
+                                15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 
+                                32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50,
+                                51, 52, 53, 54, 55, 56]
+                            });
+
+                            const workbook = new ExcelJS.Workbook();
+                            const worksheet = workbook.addWorksheet('Sheet1');
+
+                            worksheet.addRow(['NIP:', teacherData.nip]).eachCell((cell) => {
+                                cell.alignment = { horizontal: 'left' };
+                            });
+
+                            worksheet.addRow(['Nama Guru:', teacherData.nama]).eachCell((cell) => {
+                                cell.alignment = { horizontal: 'left' };
+                            });
+
+                            worksheet.addRow(['Email:', teacherData.email]).eachCell((cell) => {
+                                cell.alignment = { horizontal: 'left' };
+                            });
+
+                            worksheet.addRow([]);
+
+                            const headerRow = worksheet.addRow(tableData.header);
+
+                            headerRow.eachCell((cell) => {
+                                cell.fill = {
+                                    type: 'pattern',
+                                    pattern: 'solid',
+                                    fgColor: { argb: 'FF000000' } 
+                                };
+                                cell.font = { bold: true, color: { argb: 'FFFFFFFF' } };
+                                cell.alignment = { vertical: 'middle', horizontal: 'center', wrapText: true };
+                                cell.border = {
+                                    top: { style: 'thin' },
+                                    left: { style: 'thin' },
+                                    bottom: { style: 'thin' },
+                                    right: { style: 'thin' }
+                                };
+                            });
+
+                            tableData.body.forEach(rowData => {
+                                const row = worksheet.addRow(rowData);
+                                row.eachCell((cell) => {
+                                    cell.fill = {
+                                        type: 'pattern',
+                                        pattern: 'solid',
+                                        fgColor: { argb: 'FFF8F9FA' } 
+                                    };
+                                    cell.alignment = { vertical: 'middle', horizontal: 'center', wrapText: true };
+                                    cell.border = {
+                                        top: { style: 'thin' },
+                                        left: { style: 'thin' },
+                                        bottom: { style: 'thin' },
+                                        right: { style: 'thin' }
+                                    };
+                                });
+                            });
+
+                            worksheet.columns.forEach((column) => {
+                                let maxLength = 0;
+                                column.eachCell({ includeEmpty: true }, (cell) => {
+                                    const columnLength = cell.value ? cell.value.toString().length : 10;
+                                    if (columnLength > maxLength) {
+                                        maxLength = columnLength;
+                                    }
+                                });
+                                
+                                column.width = Math.max(maxLength + 2, column.width || 10); 
+                            });
+
+                            const buffer = await workbook.xlsx.writeBuffer();
+                            saveAs(new Blob([buffer]), 'Guru: Presentase_Hasil_Siswa.xlsx');
+                        }
+                    },
+                    {
+                        text: '<i class="fas fa-file-excel"></i>&nbsp;Excel: Rangkuman',
+                        className: 'btn btn-sm btn-outline-success',
+                        titleAttr: 'Ekspor ke Excel',
+                        action: async function (e, dt, button, config) {
+                            await loadScript('https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.3.0/exceljs.min.js');
+                            
+                            const teacherData = await fetch(`/api/get-guru-data/${teacherId}`).then(response => response.json());
+
+                            const tableData = dt.buttons.exportData({
+                                columns: [0, 1, 2, 55, 56]
                             });
 
                             const workbook = new ExcelJS.Workbook();
@@ -376,13 +461,13 @@
                     },
                     {
                         extend: 'pdfHtml5',
-                        text: '<i class="fas fa-file-pdf"></i>&nbsp;PDF',
+                        text: '<i class="fas fa-file-pdf"></i>&nbsp;PDF: Detail',
                         className: 'btn btn-sm btn-outline-danger',
                         titleAttr: 'Ekspor ke PDF',
                         orientation: 'landscape',
                         pageSize: 'A4',
                         exportOptions: {
-                            columns: [0, 1, 3, 4, 45, 46, 47]
+                            columns: [0, 1, 2, 9, 14, 19, 24, 29, 34, 39, 44, 49, 54, 55, 56]
                         },
                         filename: function() {
       
@@ -414,6 +499,52 @@
                             if (doc.content[1]) {
                                 doc.content[1].alignment = 'center';
                             }
+
+                            doc.pageMargins = [10, 10, 10, 10];
+                        }
+                    },
+                    {
+                        extend: 'pdfHtml5',
+                        text: '<i class="fas fa-file-pdf"></i>&nbsp;PDF: Rangkuman',
+                        className: 'btn btn-sm btn-outline-danger',
+                        titleAttr: 'Ekspor ke PDF',
+                        orientation: 'landscape',
+                        pageSize: 'A4',
+                        exportOptions: {
+                            columns: [0, 1, 2, 55, 56]
+                        },
+                        filename: function() {
+      
+                            return 'Guru: Laporan_Hasil_Siswa';
+                        
+                        },
+                        customize: function (doc) {
+                            $.ajax({
+                                url: '/api/get-guru-data/' + teacherId,
+                                method: 'GET',
+                                async: false,
+                                success: function(teacherData) {
+                                    doc.content.splice(0, 0, {
+                                        margin: [0, 0, 0, 12],
+                                        alignment: 'left',
+                                        stack: [
+                                            { text: 'NIP: ' + teacherData.nip, margin: [0, 0, 0, 6], alignment: 'left' },
+                                            { text: 'Nama Guru: ' + teacherData.nama, margin: [0, 0, 0, 6], alignment: 'left' },
+                                            { text: 'Email: ' + teacherData.email, margin: [0, 0, 0, 6], alignment: 'left' }
+                                        ]
+                                    });
+                                }
+                            });
+
+                            doc.content = doc.content.filter(item => {
+                                return !(item.text && item.text.includes('4TA-Literasi&Numerasi'));
+                            });
+
+                            if (doc.content[1]) {
+                                doc.content[1].alignment = 'center';
+                            }
+
+                            doc.pageMargins = [10, 10, 10, 10];
                         }
                     },
                 ],

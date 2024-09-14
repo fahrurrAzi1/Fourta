@@ -33,7 +33,7 @@
 
                         <div class="form-group">
                             <label for="nip">NIP</label>
-                            <input type="number" class="form-control" id="nip" name="nip" placeholder="NIP" required>
+                            <input type="text" class="form-control" id="nip" name="nip" placeholder="NIP" required>
                         </div>
 
                         <div class="form-group">

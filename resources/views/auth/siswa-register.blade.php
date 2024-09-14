@@ -33,7 +33,7 @@
 
                         <div class="form-group">
                             <label for="nis">NIS</label>
-                            <input type="number" name="nis" class="form-control" placeholder="NIS" required>
+                            <input type="text" name="nis" class="form-control" placeholder="NIS" required>
                         </div>
 
                         <div class="form-group">

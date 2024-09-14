@@ -121,7 +121,7 @@
                             const studentData = await fetch(`/api/get-student-data/${studentId}`).then(response => response.json());
                             
                             const tableData = dt.buttons.exportData({
-                                columns: [0, 1, 5, 6, 7]
+                                columns: [0, 1, 2, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
                             });
 
                             const workbook = new ExcelJS.Workbook();
@@ -209,7 +209,7 @@
                         orientation: 'landscape',
                         pageSize: 'A4',
                         exportOptions: {
-                            columns: [0, 1, 5, 6, 7],
+                            columns: [0, 1, 2, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
                         },
                         filename: function() {
       

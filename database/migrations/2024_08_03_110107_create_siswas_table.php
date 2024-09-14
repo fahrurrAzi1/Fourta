@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('siswas', function (Blueprint $table) {
             $table->id('id_siswa');
             $table->string('name');
-            $table->bigInteger('nis')->unique();
+            $table->string('nis')->unique();
             $table->string('email')->unique();
             $table->string('password');
             $table->string('role')->default('siswa');
