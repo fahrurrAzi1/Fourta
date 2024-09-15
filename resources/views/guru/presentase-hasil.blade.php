@@ -466,15 +466,24 @@
                         titleAttr: 'Ekspor ke PDF',
                         orientation: 'landscape',
                         pageSize: 'A4',
-                        exportOptions: {
-                            columns: [0, 1, 2, 9, 14, 19, 24, 29, 34, 39, 44, 49, 54, 55, 56]
-                        },
+                        margin: [10, 10, 10, 10],
                         filename: function() {
-      
                             return 'Guru: Laporan_Hasil_Siswa';
-                        
                         },
                         customize: function (doc) {
+                            const columnGroups = [
+                                [0, 1, 2, 5, 6, 7, 8, 9, 55, 56],
+                                [0, 1, 2, 10, 11, 12, 13, 14, 55, 56],
+                                [0, 1, 2, 15, 16, 17, 18, 19, 55, 56],
+                                [0, 1, 2, 20, 21, 22, 23, 24, 55, 56],
+                                [0, 1, 2, 25, 26, 27, 28, 29, 55, 56],
+                                [0, 1, 2, 30, 31, 32, 33, 34, 55, 56],
+                                [0, 1, 2, 35, 36, 37, 38, 39, 55, 56],
+                                [0, 1, 2, 40, 41, 42, 43, 44, 55, 56],
+                                [0, 1, 2, 45, 46, 47, 48, 49, 55, 56],
+                                [0, 1, 2, 50, 51, 52, 53, 54, 55, 56]
+                            ];
+
                             $.ajax({
                                 url: '/api/get-guru-data/' + teacherId,
                                 method: 'GET',
@@ -489,18 +498,54 @@
                                             { text: 'Email: ' + teacherData.email, margin: [0, 0, 0, 6], alignment: 'left' }
                                         ]
                                     });
+
+                                    let newContent = [];
+
+                                    columnGroups.forEach((group, index) => {
+                                        let pageContent = []; 
+
+                                        doc.content.forEach(item => {
+                                            if (item.table) {
+                                                let tableClone = JSON.parse(JSON.stringify(item));
+                                                
+                                                tableClone.table.body = tableClone.table.body.map(row => 
+                                                    row.filter((_, cellIndex) => group.includes(cellIndex))
+                                                );
+
+                                                pageContent.push(tableClone);
+                                            } else {
+                                                pageContent.push(item);
+                                            }
+                                        });
+
+                                        pageContent.push({ text: '', pageBreak: 'after' });
+
+                                        newContent = newContent.concat(pageContent);
+                                    });
+
+                                    if (newContent.length > 0) {
+                                        newContent.pop();
+                                    }
+
+                                    doc.content = newContent;
+
+                                    doc.styles.tableBodyEven = { alignment: 'center', fontSize: 3, lineHeight: 1.2 };
+                                    doc.styles.tableBodyOdd = { alignment: 'center', fontSize: 3, lineHeight: 1.2 };
+
+                                    doc.content[0].layout = {
+                                        hLineWidth: function(i) { return 0.5; },
+                                        vLineWidth: function(i) { return 0.5; },
+                                        hLineColor: function(i) { return '#aaa'; },
+                                        vLineColor: function(i) { return '#aaa'; },
+                                        paddingLeft: function(i) { return 4; },
+                                        paddingRight: function(i) { return 4; }
+                                    };
+
+                                    doc.content = doc.content.filter(item => {
+                                        return !(item.text && item.text.includes('4TA-Literasi&Numerasi'));
+                                    });
                                 }
                             });
-
-                            doc.content = doc.content.filter(item => {
-                                return !(item.text && item.text.includes('4TA-Literasi&Numerasi'));
-                            });
-
-                            if (doc.content[1]) {
-                                doc.content[1].alignment = 'center';
-                            }
-
-                            doc.pageMargins = [10, 10, 10, 10];
                         }
                     },
                     {
