@@ -79,12 +79,13 @@
                                                     <option value="numerasi" {{ request('jenis') == 'numerasi' ? 'selected' : '' }}>Numerasi</option>
                                                 </select>
                                             </div>
-
-                                            <div class="col-md-4 mt-3">
-                                                <button type="submit" class="btn btn-success mt-3 font-weight-bold">Tampilkan Soal</button>
+                                        
+                                            <div class="form-group col-md-4 d-flex align-items-end">
+                                                <button type="submit" class="btn btn-success mr-2 font-weight-bold">Pilih</button>
+                                                <button type="button" data-toggle="modal" data-target="#previewModal"
+                                                 id="previewButton" class="btn btn-warning font-weight-bold">Preview</button>
                                             </div>
-
-                                        </div>
+                                        </div>                                        
                                     </form>
                                 </div>
                                 
@@ -174,6 +175,28 @@
         </div>
     </div>
 
+    <!-- Modal Preview-->
+    <div class="modal fade" id="previewModal" tabindex="-1" role="dialog" aria-labelledby="previewModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="previewModalLabel">Preview Soal</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body overflow-y-auto">
+                    <div id="previewContent">
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- skrip untuk jquery -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
@@ -190,6 +213,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     
     <script>
+        
         $('#editModal').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget); 
             var id = button.data('id'); 
@@ -298,6 +322,29 @@
                     }
                 });
             }
+        });
+
+                
+        $('#previewButton').on('click', function() {
+            var previewContent = '';
+            var soals = @json($soals); 
+
+            if (soals.length > 0) {
+                soals.forEach(function(soal, index) {
+                    previewContent += `
+                        <div class="mb-4">
+                            <h5>Soal ${index + 1}</h5>
+                            <p>${soal.pertanyaan}</p>
+                            <textarea class="form-control" name="jawaban" rows="3" disabled></textarea>
+                        </div>
+                        <hr>
+                    `;
+                });
+            } else {
+                previewContent = '<p>Tidak ada soal yang tersedia sesuai filter.</p>';
+            }
+
+            $('#previewContent').html(previewContent); 
         });
         
     </script>
