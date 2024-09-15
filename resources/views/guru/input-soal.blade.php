@@ -333,8 +333,9 @@
                 soals.forEach(function(soal, index) {
                     previewContent += `
                         <div class="mb-4">
-                            <h5>Soal ${index + 1}</h5>
+                            <p><strong>Soal ${index + 1}</strong></p>
                             <p>${soal.pertanyaan}</p>
+                            <label for="jawaban" class="ml-3">Jawaban:</label>
                             <textarea class="form-control" name="jawaban" rows="3" disabled></textarea>
                         </div>
                         <hr>

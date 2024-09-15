@@ -164,11 +164,15 @@ class GuruController extends Controller
     {
  
         $gurus = Guru::with('kelas')->findOrFail($guru_id);
+
+        $kelas = Kelas::where('guru_id', $guru_id)->first(); 
         
         return response()->json([
             'nip' => $gurus->nip,
             'nama' => $gurus->name,
             'email' => $gurus->email,
+            'kelas' => $kelas ? $kelas->id_kelas : 'Kosong',
+            'nama_sekolah' => $kelas ? $kelas->nama_sekolah : 'Kosong'
         ]);
     }
 

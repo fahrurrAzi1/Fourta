@@ -304,7 +304,7 @@
                             const teacherData = await fetch(`/api/get-guru-data/${teacherId}`).then(response => response.json());
 
                             const tableData = dt.buttons.exportData({
-                                columns: [0, 1, 2, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
                                 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 
                                 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50,
                                 51, 52, 53, 54, 55, 56]
@@ -322,6 +322,10 @@
                             });
 
                             worksheet.addRow(['Email:', teacherData.email]).eachCell((cell) => {
+                                cell.alignment = { horizontal: 'left' };
+                            });
+
+                            worksheet.addRow(['Jenis:', selectedJenis || 'Literasi, Numerasi']).eachCell((cell) => {
                                 cell.alignment = { horizontal: 'left' };
                             });
 
@@ -389,7 +393,7 @@
                             const teacherData = await fetch(`/api/get-guru-data/${teacherId}`).then(response => response.json());
 
                             const tableData = dt.buttons.exportData({
-                                columns: [0, 1, 2, 55, 56]
+                                columns: [0, 1, 2, 3, 4, 55, 56]
                             });
 
                             const workbook = new ExcelJS.Workbook();
@@ -404,6 +408,10 @@
                             });
 
                             worksheet.addRow(['Email:', teacherData.email]).eachCell((cell) => {
+                                cell.alignment = { horizontal: 'left' };
+                            });
+
+                            worksheet.addRow(['Jenis:', selectedJenis || 'Literasi, Numerasi']).eachCell((cell) => {
                                 cell.alignment = { horizontal: 'left' };
                             });
 
@@ -474,16 +482,16 @@
                         },
                         customize: function (doc) {
                             const columnGroups = [
-                                [0, 1, 2, 5, 6, 7, 8, 9, 55, 56],
-                                [0, 1, 2, 10, 11, 12, 13, 14, 55, 56],
-                                [0, 1, 2, 15, 16, 17, 18, 19, 55, 56],
-                                [0, 1, 2, 20, 21, 22, 23, 24, 55, 56],
-                                [0, 1, 2, 25, 26, 27, 28, 29, 55, 56],
-                                [0, 1, 2, 30, 31, 32, 33, 34, 55, 56],
-                                [0, 1, 2, 35, 36, 37, 38, 39, 55, 56],
-                                [0, 1, 2, 40, 41, 42, 43, 44, 55, 56],
-                                [0, 1, 2, 45, 46, 47, 48, 49, 55, 56],
-                                [0, 1, 2, 50, 51, 52, 53, 54, 55, 56]
+                                [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 55, 56],
+                                [0, 1, 2, 3, 4, 10, 11, 12, 13, 14, 55, 56],
+                                [0, 1, 2, 3, 4, 15, 16, 17, 18, 19, 55, 56],
+                                [0, 1, 2, 3, 4, 20, 21, 22, 23, 24, 55, 56],
+                                [0, 1, 2, 3, 4, 25, 26, 27, 28, 29, 55, 56],
+                                [0, 1, 2, 3, 4, 30, 31, 32, 33, 34, 55, 56],
+                                [0, 1, 2, 3, 4, 35, 36, 37, 38, 39, 55, 56],
+                                [0, 1, 2, 3, 4, 40, 41, 42, 43, 44, 55, 56],
+                                [0, 1, 2, 3, 4, 45, 46, 47, 48, 49, 55, 56],
+                                [0, 1, 2, 3, 4, 50, 51, 52, 53, 54, 55, 56]
                             ];
 
                             $.ajax({
@@ -497,7 +505,8 @@
                                         stack: [
                                             { text: 'NIP: ' + teacherData.nip, margin: [0, 0, 0, 6], alignment: 'left' },
                                             { text: 'Nama Guru: ' + teacherData.nama, margin: [0, 0, 0, 6], alignment: 'left' },
-                                            { text: 'Email: ' + teacherData.email, margin: [0, 0, 0, 6], alignment: 'left' }
+                                            { text: 'Email: ' + teacherData.email, margin: [0, 0, 0, 6], alignment: 'left' },
+                                            { text: 'Jenis: ' + (selectedJenis ? selectedJenis : 'Literasi, Numerasi'), margin: [0, 0, 0, 6], alignment: 'left' }
                                         ]
                                     });
 
@@ -558,7 +567,7 @@
                         orientation: 'landscape',
                         pageSize: 'A4',
                         exportOptions: {
-                            columns: [0, 1, 2, 55, 56]
+                            columns: [0, 1, 2, 3, 4, 55, 56]
                         },
                         filename: function() {
       
@@ -577,7 +586,8 @@
                                         stack: [
                                             { text: 'NIP: ' + teacherData.nip, margin: [0, 0, 0, 6], alignment: 'left' },
                                             { text: 'Nama Guru: ' + teacherData.nama, margin: [0, 0, 0, 6], alignment: 'left' },
-                                            { text: 'Email: ' + teacherData.email, margin: [0, 0, 0, 6], alignment: 'left' }
+                                            { text: 'Email: ' + teacherData.email, margin: [0, 0, 0, 6], alignment: 'left' },
+                                            { text: 'Jenis: ' + (selectedJenis ? selectedJenis : 'Literasi, Numerasi'), margin: [0, 0, 0, 6], alignment: 'left' }
                                         ]
                                     });
                                 }
