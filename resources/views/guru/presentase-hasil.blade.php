@@ -540,8 +540,8 @@
 
                                     doc.content = newContent;
 
-                                    doc.styles.tableBodyEven = { alignment: 'center', fontSize: 3, lineHeight: 1.2 };
-                                    doc.styles.tableBodyOdd = { alignment: 'center', fontSize: 3, lineHeight: 1.2 };
+                                    doc.styles.tableBodyEven = { alignment: 'center', fontSize: 11, lineHeight: 1.2 };
+                                    doc.styles.tableBodyOdd = { alignment: 'center', fontSize: 11, lineHeight: 1.2 };
 
                                     doc.content[0].layout = {
                                         hLineWidth: function(i) { return 0.5; },
@@ -639,6 +639,13 @@
                         applyFilters();
                     });
                 }
+            });
+
+            table.on('draw.dt', function() {
+                var info = table.page.info();
+                table.column(0, { search: 'applied', order: 'applied' }).nodes().each(function(cell, i) {
+                    cell.innerHTML = i + 1 + info.start;
+                });
             });
 
             table.on('draw', function() {

@@ -61,14 +61,17 @@ class SiswaController extends Controller
                 })
                 ->get();
 
-        $groupedResults = $hasil->groupBy('id_siswa');
-
+        $groupedResults = $hasil->groupBy(function($item) {
+                    return $item->id_siswa . '-' . $item->jenis;
+                });
+    
         $i = 1;
 
         return DataTables::of($groupedResults)
             ->addIndexColumn()
-            ->addColumn('no', function($row) use (&$i) {
-                return $i++; 
+            ->addColumn('no', function($row) {
+                static $index = 1;
+                return $index++;
             })
             ->addColumn('nama', function($row) {
 

@@ -293,6 +293,13 @@
                     }
                 }
             });
+
+            table.on('draw.dt', function() {
+                var info = table.page.info();
+                table.column(0, { search: 'applied', order: 'applied' }).nodes().each(function(cell, i) {
+                    cell.innerHTML = i + 1 + info.start;
+                });
+            });
     
             table.on('draw', function() {
                 var data = table.rows({ filter: 'applied' }).data();

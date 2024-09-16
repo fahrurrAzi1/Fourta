@@ -349,15 +349,18 @@ class SoalController extends Controller
                     })
                     ->get();
 
-        $groupedResults = $results->groupBy('id_siswa');
+        $groupedResults = $results->groupBy(function($item) {
+                return $item->id_siswa . '-' . $item->jenis;
+            });
 
         $i = 1;
 
         return DataTables::of($groupedResults)
             ->addIndexColumn()
-            ->addColumn('no', function($row) use (&$i) {
-                return $i++; 
-            })
+            ->addColumn('no', function($row) {
+                static $index = 1;
+                return $index++;
+            })            
             ->addColumn('nama', function($row) {
 
                 return $row->first()->siswa->name; 
