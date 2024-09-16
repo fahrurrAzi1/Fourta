@@ -19,11 +19,28 @@
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                 @csrf
 
-                @if (Auth::user()->role == 'guru')
-                    <a class="dropdown-item" href="#">
+                @if (Auth::user()->role == 'admin')
+                {{-- <a class="dropdown-item" href="#">
+                    <i class="nav-icon fas fa-user ml-2"></i>&nbsp;&nbsp;&nbsp;
+                    {{ __('Profile') }}
+                </a> --}}
+                <a class="dropdown-item" href="{{ route('logout') }}"
+                onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">
+
+                    <i class="nav-icon fas fa-door-open ml-2"></i>&nbsp;&nbsp;
+                    {{ __('Logout') }}
+                </a>
+
+                <form id="logout-form" action="{{ route('guru.logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
+
+                @elseif (Auth::user()->role == 'guru')
+                    {{-- <a class="dropdown-item" href="#">
                         <i class="nav-icon fas fa-user ml-2"></i>&nbsp;&nbsp;&nbsp;
                         {{ __('Profile') }}
-                    </a>
+                    </a> --}}
                     <a class="dropdown-item" href="{{ route('logout') }}"
                     onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();">
@@ -37,10 +54,10 @@
                     </form>
 
                 @elseif (Auth::user()->role == 'siswa')
-                    <a class="dropdown-item" href="#">
+                    {{-- <a class="dropdown-item" href="#">
                         <i class="nav-icon fas fa-user ml-2"></i>&nbsp;&nbsp;&nbsp;
                         {{ __('Profile') }}
-                    </a>
+                    </a> --}}
                     <a class="dropdown-item" href="{{ route('logout') }}"
                     onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();">

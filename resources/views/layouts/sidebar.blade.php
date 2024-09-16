@@ -69,9 +69,9 @@
                 <li class="nav-item">
                     @if (Auth::user()->role == 'admin')
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-file-alt"></i>
-                                <p>Kelola User</p>
+                            <a href="{{ route('admin.kelola-kelas-admin') }}" class="nav-link">
+                                <i class="nav-icon fas fas fa-school"></i>
+                                <p>Kelola Kelas</p>
                             </a>
                         </li>
                     @elseif (Auth::user()->role == 'guru')
@@ -93,9 +93,9 @@
                 <li class="nav-item">
                     @if (Auth::user()->role == 'admin')
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-file-alt"></i>
-                                <p>Kelola Password</p>
+                            <a href="{{ route('admin.input-soal-admin') }}" class="nav-link">
+                                <i class="nav-icon fas fas fa-file-alt"></i>
+                                <p>Input Soal</p>
                             </a>
                         </li>
                     @elseif (Auth::user()->role == 'guru')
@@ -116,10 +116,10 @@
                 </li>
                 <li class="nav-item">
                     @if (Auth::user()->role == 'admin')
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-school"></i>
-                                <p>Kelola Kelas</p>
+                       <li class="nav-item">
+                            <a href="{{ route('admin.kelola-jawaban-admin') }}" class="nav-link">
+                                <i class="nav-icon fas fa-clipboard-check"></i>
+                                <p>Kelola Jawaban</p>
                             </a>
                         </li>
                     @elseif (Auth::user()->role == 'guru')
@@ -135,7 +135,12 @@
                 </li>
                 <li class="nav-item">
                     @if (Auth::user()->role == 'admin')
-                        <!-- tombol kosong -->
+                        <li class="nav-item">
+                            <a href="{{ route('admin.presentase-hasil-admin') }}" class="nav-link">
+                                <i class="nav-icon fas fa-chart-simple"></i>
+                                <p>Presentase Hasil Siswa</p>
+                            </a>
+                        </li>
                     @elseif (Auth::user()->role == 'guru')
                         <li class="nav-item">
                             <a href="{{ route('guru.presentase-hasil') }}" class="nav-link">

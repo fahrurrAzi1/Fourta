@@ -1,11 +1,14 @@
 <?php
 
 use App\Models\Guru;
+use App\Models\Soal;
+use App\Models\Admin;
 use App\Models\Kelas;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GuruController;
 use App\Http\Controllers\SoalController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\JawabanController;
 use App\Http\Controllers\KomentarController;
@@ -13,7 +16,7 @@ use App\Http\Controllers\SkorJawabanController;
 use App\Http\Controllers\Auth\GuruAuthController;
 use App\Http\Controllers\Auth\AdminAuthController;
 use App\Http\Controllers\Auth\SiswaAuthController;
-use App\Models\Soal;
+use App\Http\Controllers\SoalControllerAdmin;
 
 Route::get('/', function () {
     return view('welcome');
@@ -29,6 +32,39 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::get('admin/dashboard', function () {
         return view('admin.admin-dashboard');
     })->name('admin.dashboard');
+    Route::get('admin/input-soal-admin', [AdminController::class, 'inputSoal'])->name('admin.input-soal-admin');
+    Route::get('admin/kelola-kelas-admin', [AdminController::class, 'kelolaKelas'])->name('admin.kelola-kelas-admin');
+    Route::post('admin/kelas/tambah', [AdminController::class, 'store']);
+    Route::delete('/admin/kelas/hapus/{id}', [AdminController::class, 'destroy']);
+    //rute kelola jawaban
+    Route::get('admin/kelola-jawaban-admin',[AdminController::class, 'kelolaJawaban'])->name('admin.kelola-jawaban-admin');
+    Route::post('admin/kelola-jawaban-admin', [AdminController::class, 'kelolaJawaban'])->name('admin.kelola-jawaban-admin.post');
+    //rute presentase hasil siswa
+    // Route::get('guru/presentase-hasil',[AdminController::class, 'presentaseHasil'])->name('guru.presentase-hasil');
+    // untuk rute soal
+    Route::post('/soal-admin', [SoalControllerAdmin::class, 'soalStore'])->name('soal-admin.store');
+    Route::post('/soal-admin/deactivate/{id}', [SoalControllerAdmin::class, 'deactivate'])->name('soal-admin.deactivate');
+    Route::delete('/soal-admin/{id}', [SoalControllerAdmin::class, 'delete'])->name('soal-admin.delete');
+    Route::get('/soal-admin/filter', [SoalControllerAdmin::class, 'filter'])->name('soal-admin.filter');
+    Route::get('/soal-admin/edit/{id}', [SoalControllerAdmin::class, 'edit'])->name('soal-admin.edit');
+    // Route::post('/soal/update/{id}', [SoalControllerAdmin::class, 'update'])->name('soal.update');
+    Route::put('/soal-admin/{id}', [SoalControllerAdmin::class, 'update'])->name('soal-admin.update');
+    // untuk rute upload
+    Route::post('/upload', [AdminController::class, 'upload'])->name('upload');
+    //untuk mengirim komentar
+    Route::get('/get-komentar', [SoalControllerAdmin::class, 'getKomentar']);
+    // untuk mengambil komentar
+    Route::post('/save-komentar', [SoalControllerAdmin::class, 'saveKomentar']);
+    //rute untuk mengirim benar atau salah jawaban
+    Route::post('/admin/update-skor-jawaban-admin', [SoalControllerAdmin::class, 'updateSkorJawaban'])->name('admin.update-skor-jawaban-admin');
+    // rute untuk presentase hasil
+    Route::get('/admin/presentase-hasil-admin', [SoalControllerAdmin::class, 'skorHasil'])->name('admin.presentase-hasil-admin');
+    // rute untuk data-table presentase hasil
+    Route::get('datatable/resultsAdmin', [SoalControllerAdmin::class, 'getResults'])->name('datatable.resultsAdmin');
+    // mengambil data siswa di kelas
+    Route::get('/admin/get-siswa-by-kelas', [AdminController::class, 'getSiswaByKelas'])->name('admin.get-siswa-by-kelas');
+    // mengambil data untuk ekspor
+    Route::get('/api/get-admin-data/{id}', [AdminController::class, 'getAdminData']);
 });
 
 
@@ -75,7 +111,7 @@ Route::middleware(['auth:guru'])->group(function () {
     // mengambil data siswa di kelas
     Route::get('/guru/get-siswa-by-kelas', [GuruController::class, 'getSiswaByKelas'])->name('guru.get-siswa-by-kelas');
     // mengambil data untuk ekspor
-    Route::get('/api/get-guru-data/{id}', [GuruController::class, 'getGuruData']);
+    Route::get('/api/get-guru-data', [GuruController::class, 'getGuruData']);
 });
 
 // rute siswa
