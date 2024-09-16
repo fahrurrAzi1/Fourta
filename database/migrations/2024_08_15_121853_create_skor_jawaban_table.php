@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_soal');
             $table->unsignedBigInteger('kelas_id')->nullable();
             $table->enum('jenis', ['literasi', 'numerasi']);
+            $table->integer('nomor_soal')->default(1); 
             $table->integer('skor_jawaban_siswa')->notNullable();
             $table->integer('skor_yakin_jawaban')->notNullable();
             $table->integer('skor_alasan')->notNullable();

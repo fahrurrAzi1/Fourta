@@ -202,6 +202,13 @@ class SoalController extends Controller
         $soal = Soal::find($validatedData['id_soal']);
         $jenis = $soal->jenis;
 
+        // Hitung nomor soal berdasarkan jenis soal
+        $lastSoal = SkorJawaban::where('jenis', $jenis)
+            ->orderBy('nomor_soal', 'desc')
+            ->first();
+        
+        $nomorSoal = $lastSoal ? $lastSoal->nomor_soal + 1 : 1;
+
         $skor = SkorJawaban::firstOrCreate(
             ['id_siswa' => $validatedData['id_siswa'], 'id_soal' => $validatedData['id_soal'],'jenis' => $jenis],
             [
@@ -212,6 +219,7 @@ class SoalController extends Controller
                 'skor_akhir' => 0, 
                 'kategori_skor' => '',
                 'kelas_id' => $kelasId,
+                'nomor_soal' => $nomorSoal,
             ]
         );
 
