@@ -51,7 +51,7 @@ Route::middleware(['auth:guru'])->group(function () {
     Route::get('guru/kelola-jawaban',[GuruController::class, 'kelolaJawaban'])->name('guru.kelola-jawaban');
     Route::post('guru/kelola-jawaban', [GuruController::class, 'kelolaJawaban'])->name('guru.kelola-jawaban.post');
     //rute presentase hasil siswa
-    Route::get('guru/presentase-hasil',[GuruController::class, 'presentaseHasil'])->name('guru.presentase-hasil');
+    // Route::get('guru/presentase-hasil',[GuruController::class, 'presentaseHasil'])->name('guru.presentase-hasil');
     // untuk rute soal
     Route::post('/soal', [SoalController::class, 'soalStore'])->name('soal.store');
     Route::post('/soal/deactivate/{id}', [SoalController::class, 'deactivate'])->name('soal.deactivate');

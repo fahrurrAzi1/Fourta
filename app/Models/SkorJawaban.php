@@ -23,6 +23,7 @@ class SkorJawaban extends Model
         'id_komentar',
         'skor_akhir',
         'kategori_skor',
+        'nomor_soal'
     ];
 
     public function siswa()

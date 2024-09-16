@@ -374,111 +374,111 @@ class SoalController extends Controller
             ->addColumn('sekolah',function($row){
                 return $row->first()->siswa->nama_sekolah;
             })
-            ->addColumn('q1_I', function($row) { return $row->where('id_soal', 1)->first()->skor_jawaban_siswa ?? ''; })
-            ->addColumn('q1_II', function($row) { return $row->where('id_soal', 1)->first()->skor_yakin_jawaban ?? ''; })
-            ->addColumn('q1_III', function($row) { return $row->where('id_soal', 1)->first()->skor_alasan ?? ''; })
-            ->addColumn('q1_IV', function($row) { return $row->where('id_soal', 1)->first()->skor_yakin_alasan ?? ''; })
+            ->addColumn('q1_I', function($row) { return $row->where('nomor_soal', 1)->first()->skor_jawaban_siswa ?? ''; })
+            ->addColumn('q1_II', function($row) { return $row->where('nomor_soal', 1)->first()->skor_yakin_jawaban ?? ''; })
+            ->addColumn('q1_III', function($row) { return $row->where('nomor_soal', 1)->first()->skor_alasan ?? ''; })
+            ->addColumn('q1_IV', function($row) { return $row->where('nomor_soal', 1)->first()->skor_yakin_alasan ?? ''; })
             ->addColumn('q1_komentar', function($row) {
-                $firstItem = $row->where('id_soal', 1)->first();  
+                $firstItem = $row->where('nomor_soal', 1)->first();  
                 if ($firstItem && $firstItem->komentar) {
                     return $firstItem->komentar->isi_komentar;  
                 }
                 return '';  
             })            
-            ->addColumn('q2_I', function($row) { return $row->where('id_soal', 2)->first()->skor_jawaban_siswa ?? ''; })
-            ->addColumn('q2_II', function($row) { return $row->where('id_soal', 2)->first()->skor_yakin_jawaban ?? ''; })
-            ->addColumn('q2_III', function($row) { return $row->where('id_soal', 2)->first()->skor_alasan ?? ''; })
-            ->addColumn('q2_IV', function($row) { return $row->where('id_soal', 2)->first()->skor_yakin_alasan ?? ''; })
+            ->addColumn('q2_I', function($row) { return $row->where('nomor_soal', 2)->first()->skor_jawaban_siswa ?? ''; })
+            ->addColumn('q2_II', function($row) { return $row->where('nomor_soal', 2)->first()->skor_yakin_jawaban ?? ''; })
+            ->addColumn('q2_III', function($row) { return $row->where('nomor_soal', 2)->first()->skor_alasan ?? ''; })
+            ->addColumn('q2_IV', function($row) { return $row->where('nomor_soal', 2)->first()->skor_yakin_alasan ?? ''; })
             ->addColumn('q2_komentar', function($row) {
-                $firstItem = $row->where('id_soal', 2)->first();  
+                $firstItem = $row->where('nomor_soal', 2)->first();  
                 if ($firstItem && $firstItem->komentar) {
                     return $firstItem->komentar->isi_komentar;  
                 }
                 return '';  
             })   
-            ->addColumn('q3_I', function($row) { return $row->where('id_soal', 3)->first()->skor_jawaban_siswa ?? ''; })
-            ->addColumn('q3_II', function($row) { return $row->where('id_soal', 3)->first()->skor_yakin_jawaban ?? ''; })
-            ->addColumn('q3_III', function($row) { return $row->where('id_soal', 3)->first()->skor_alasan ?? ''; })
-            ->addColumn('q3_IV', function($row) { return $row->where('id_soal', 3)->first()->skor_yakin_alasan ?? ''; })
+            ->addColumn('q3_I', function($row) { return $row->where('nomor_soal', 3)->first()->skor_jawaban_siswa ?? ''; })
+            ->addColumn('q3_II', function($row) { return $row->where('nomor_soal', 3)->first()->skor_yakin_jawaban ?? ''; })
+            ->addColumn('q3_III', function($row) { return $row->where('nomor_soal', 3)->first()->skor_alasan ?? ''; })
+            ->addColumn('q3_IV', function($row) { return $row->where('nomor_soal', 3)->first()->skor_yakin_alasan ?? ''; })
             ->addColumn('q3_komentar', function($row) {
-                $firstItem = $row->where('id_soal', 3)->first();  
+                $firstItem = $row->where('nomor_soal', 3)->first();  
                 if ($firstItem && $firstItem->komentar) {
                     return $firstItem->komentar->isi_komentar;  
                 }
                 return '';  
             })
-            ->addColumn('q4_I', function($row) { return $row->where('id_soal', 4)->first()->skor_jawaban_siswa ?? ''; })
-            ->addColumn('q4_II', function($row) { return $row->where('id_soal', 4)->first()->skor_yakin_jawaban ?? ''; })
-            ->addColumn('q4_III', function($row) { return $row->where('id_soal', 4)->first()->skor_alasan ?? ''; })
-            ->addColumn('q4_IV', function($row) { return $row->where('id_soal', 4)->first()->skor_yakin_alasan ?? ''; })
+            ->addColumn('q4_I', function($row) { return $row->where('nomor_soal', 4)->first()->skor_jawaban_siswa ?? ''; })
+            ->addColumn('q4_II', function($row) { return $row->where('nomor_soal', 4)->first()->skor_yakin_jawaban ?? ''; })
+            ->addColumn('q4_III', function($row) { return $row->where('nomor_soal', 4)->first()->skor_alasan ?? ''; })
+            ->addColumn('q4_IV', function($row) { return $row->where('nomor_soal', 4)->first()->skor_yakin_alasan ?? ''; })
             ->addColumn('q4_komentar', function($row) {
-                $firstItem = $row->where('id_soal', 4)->first();  
+                $firstItem = $row->where('nomor_soal', 4)->first();  
                 if ($firstItem && $firstItem->komentar) {
                     return $firstItem->komentar->isi_komentar;  
                 }
                 return '';  
             })
-            ->addColumn('q5_I', function($row) { return $row->where('id_soal', 5)->first()->skor_jawaban_siswa ?? ''; })
-            ->addColumn('q5_II', function($row) { return $row->where('id_soal', 5)->first()->skor_yakin_jawaban ?? ''; })
-            ->addColumn('q5_III', function($row) { return $row->where('id_soal', 5)->first()->skor_alasan ?? ''; })
-            ->addColumn('q5_IV', function($row) { return $row->where('id_soal', 5)->first()->skor_yakin_alasan ?? ''; })
+            ->addColumn('q5_I', function($row) { return $row->where('nomor_soal', 5)->first()->skor_jawaban_siswa ?? ''; })
+            ->addColumn('q5_II', function($row) { return $row->where('nomor_soal', 5)->first()->skor_yakin_jawaban ?? ''; })
+            ->addColumn('q5_III', function($row) { return $row->where('nomor_soal', 5)->first()->skor_alasan ?? ''; })
+            ->addColumn('q5_IV', function($row) { return $row->where('nomor_soal', 5)->first()->skor_yakin_alasan ?? ''; })
             ->addColumn('q5_komentar', function($row) {
-                $firstItem = $row->where('id_soal', 5)->first();  
+                $firstItem = $row->where('nomor_soal', 5)->first();  
                 if ($firstItem && $firstItem->komentar) {
                     return $firstItem->komentar->isi_komentar;  
                 }
                 return '';  
             })
-            ->addColumn('q6_I', function($row) { return $row->where('id_soal', 6)->first()->skor_jawaban_siswa ?? ''; })
-            ->addColumn('q6_II', function($row) { return $row->where('id_soal', 6)->first()->skor_yakin_jawaban ?? ''; })
-            ->addColumn('q6_III', function($row) { return $row->where('id_soal', 6)->first()->skor_alasan ?? ''; })
-            ->addColumn('q6_IV', function($row) { return $row->where('id_soal', 6)->first()->skor_yakin_alasan ?? ''; })
+            ->addColumn('q6_I', function($row) { return $row->where('nomor_soal', 6)->first()->skor_jawaban_siswa ?? ''; })
+            ->addColumn('q6_II', function($row) { return $row->where('nomor_soal', 6)->first()->skor_yakin_jawaban ?? ''; })
+            ->addColumn('q6_III', function($row) { return $row->where('nomor_soal', 6)->first()->skor_alasan ?? ''; })
+            ->addColumn('q6_IV', function($row) { return $row->where('nomor_soal', 6)->first()->skor_yakin_alasan ?? ''; })
             ->addColumn('q6_komentar', function($row) {
-                $firstItem = $row->where('id_soal', 6)->first();  
+                $firstItem = $row->where('nomor_soal', 6)->first();  
                 if ($firstItem && $firstItem->komentar) {
                     return $firstItem->komentar->isi_komentar;  
                 }
                 return '';  
             })
-            ->addColumn('q7_I', function($row) { return $row->where('id_soal', 7)->first()->skor_jawaban_siswa ?? ''; })
-            ->addColumn('q7_II', function($row) { return $row->where('id_soal', 7)->first()->skor_yakin_jawaban ?? ''; })
-            ->addColumn('q7_III', function($row) { return $row->where('id_soal', 7)->first()->skor_alasan ?? ''; })
-            ->addColumn('q7_IV', function($row) { return $row->where('id_soal', 7)->first()->skor_yakin_alasan ?? ''; })
+            ->addColumn('q7_I', function($row) { return $row->where('nomor_soal', 7)->first()->skor_jawaban_siswa ?? ''; })
+            ->addColumn('q7_II', function($row) { return $row->where('nomor_soal', 7)->first()->skor_yakin_jawaban ?? ''; })
+            ->addColumn('q7_III', function($row) { return $row->where('nomor_soal', 7)->first()->skor_alasan ?? ''; })
+            ->addColumn('q7_IV', function($row) { return $row->where('nomor_soal', 7)->first()->skor_yakin_alasan ?? ''; })
             ->addColumn('q7_komentar', function($row) {
-                $firstItem = $row->where('id_soal', 7)->first();  
+                $firstItem = $row->where('nomor_soal', 7)->first();  
                 if ($firstItem && $firstItem->komentar) {
                     return $firstItem->komentar->isi_komentar;  
                 }
                 return '';  
             })
-            ->addColumn('q8_I', function($row) { return $row->where('id_soal', 8)->first()->skor_jawaban_siswa ?? ''; })
-            ->addColumn('q8_II', function($row) { return $row->where('id_soal', 8)->first()->skor_yakin_jawaban ?? ''; })
-            ->addColumn('q8_III', function($row) { return $row->where('id_soal', 8)->first()->skor_alasan ?? ''; })
-            ->addColumn('q8_IV', function($row) { return $row->where('id_soal', 8)->first()->skor_yakin_alasan ?? ''; })
+            ->addColumn('q8_I', function($row) { return $row->where('nomor_soal', 8)->first()->skor_jawaban_siswa ?? ''; })
+            ->addColumn('q8_II', function($row) { return $row->where('nomor_soal', 8)->first()->skor_yakin_jawaban ?? ''; })
+            ->addColumn('q8_III', function($row) { return $row->where('nomor_soal', 8)->first()->skor_alasan ?? ''; })
+            ->addColumn('q8_IV', function($row) { return $row->where('nomor_soal', 8)->first()->skor_yakin_alasan ?? ''; })
             ->addColumn('q8_komentar', function($row) {
-                $firstItem = $row->where('id_soal', 8)->first();  
+                $firstItem = $row->where('nomor_soal', 8)->first();  
                 if ($firstItem && $firstItem->komentar) {
                     return $firstItem->komentar->isi_komentar;  
                 }
                 return '';  
             })
-            ->addColumn('q9_I', function($row) { return $row->where('id_soal', 9)->first()->skor_jawaban_siswa ?? ''; })
-            ->addColumn('q9_II', function($row) { return $row->where('id_soal', 9)->first()->skor_yakin_jawaban ?? ''; })
-            ->addColumn('q9_III', function($row) { return $row->where('id_soal', 9)->first()->skor_alasan ?? ''; })
-            ->addColumn('q9_IV', function($row) { return $row->where('id_soal', 9)->first()->skor_yakin_alasan ?? ''; })
+            ->addColumn('q9_I', function($row) { return $row->where('nomor_soal', 9)->first()->skor_jawaban_siswa ?? ''; })
+            ->addColumn('q9_II', function($row) { return $row->where('nomor_soal', 9)->first()->skor_yakin_jawaban ?? ''; })
+            ->addColumn('q9_III', function($row) { return $row->where('nomor_soal', 9)->first()->skor_alasan ?? ''; })
+            ->addColumn('q9_IV', function($row) { return $row->where('nomor_soal', 9)->first()->skor_yakin_alasan ?? ''; })
             ->addColumn('q9_komentar', function($row) {
-                $firstItem = $row->where('id_soal', 9)->first();  
+                $firstItem = $row->where('nomor_soal', 9)->first();  
                 if ($firstItem && $firstItem->komentar) {
                     return $firstItem->komentar->isi_komentar;  
                 }
                 return '';  
             })
-            ->addColumn('q10_I', function($row) { return $row->where('id_soal', 10)->first()->skor_jawaban_siswa ?? ''; })
-            ->addColumn('q10_II', function($row) { return $row->where('id_soal', 10)->first()->skor_yakin_jawaban ?? ''; })
-            ->addColumn('q10_III', function($row) { return $row->where('id_soal', 10)->first()->skor_alasan ?? ''; })
-            ->addColumn('q10_IV', function($row) { return $row->where('id_soal', 10)->first()->skor_yakin_alasan ?? ''; })
+            ->addColumn('q10_I', function($row) { return $row->where('nomor_soal', 10)->first()->skor_jawaban_siswa ?? ''; })
+            ->addColumn('q10_II', function($row) { return $row->where('nomor_soal', 10)->first()->skor_yakin_jawaban ?? ''; })
+            ->addColumn('q10_III', function($row) { return $row->where('nomor_soal', 10)->first()->skor_alasan ?? ''; })
+            ->addColumn('q10_IV', function($row) { return $row->where('nomor_soal', 10)->first()->skor_yakin_alasan ?? ''; })
             ->addColumn('q10_komentar', function($row) {
-                $firstItem = $row->where('id_soal', 10)->first();  
+                $firstItem = $row->where('nomor_soal', 10)->first();  
                 if ($firstItem && $firstItem->komentar) {
                     return $firstItem->komentar->isi_komentar;  
                 }
