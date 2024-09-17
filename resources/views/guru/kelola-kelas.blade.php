@@ -78,7 +78,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>    
 
     <!-- Skrip jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -112,11 +112,32 @@
                     $('div.dataTables_filter').addClass('d-flex justify-content-end align-items-center');
                     
                     $('div.dataTables_filter').append(`
-                        <button type="button" class="btn btn-primary ml-3 mt-3 font-weight-bold" data-toggle="modal" data-target="#kelasModal">
+                        <button type="button" class="btn btn-primary ml-3 mt-3 font-weight-bold" data-toggle="modal" data-target="#kelasModal" id="tambahKelasBtn">
                             Tambah Kelas
                         </button>
                     `);
+
                 }
+            });
+
+            $(document).on('click', '#tambahKelasBtn', function() {
+                $('#formTambahKelas').trigger('reset'); 
+                $('#formTambahKelas').attr('action', "{{ url('guru/kelas/tambah') }}"); 
+                $('#kelasModalLabel').text('Tambah Kelas'); 
+            });
+
+            $(document).on('click', '.edit-class', function() {
+                var id = $(this).data('id');
+                var kelas = $(this).data('kelas');
+                var sekolah = $(this).data('sekolah');
+
+                $('#idKelas').val(kelas);
+                $('#nama_sekolah').val(sekolah);
+                $('#formTambahKelas').attr('action', '/guru/kelas/edit/' + id); 
+
+                $('#kelasModalLabel').text('Edit Kelas');
+
+                $('#kelasModal').modal('show');
             });
 
             $(document).on('click', '.delete-class', function() {
