@@ -64,11 +64,13 @@ class SoalController extends Controller
         $request->validate([
             'pertanyaan' => 'required|string',
             'waktu' => 'required|integer|min:1',
+            'status' => 'required|string|in:on,off',
         ]);
 
         $soal = Soal::findOrFail($id);
         $soal->pertanyaan = $request->input('pertanyaan');
         $soal->waktu = $request->input('waktu');
+        $soal->status = $request->input('status');
         $soal->save();
 
         return redirect()->route('guru.input-soal')->with('success', 'Soal berhasil diperbarui!');
@@ -177,6 +179,7 @@ class SoalController extends Controller
 
         $soals = Soal::where('jenis', $jenis)
                     ->where('kelas_id', $idKelas)
+                    ->where('status', '!=', 'off')
                     ->get();
 
         return view('siswa.isi-soal', compact('soals'));

@@ -121,7 +121,9 @@
                                                                     data-id="{{ $soal->id }}" 
                                                                     data-pertanyaan="{{ $soal->pertanyaan }}" 
                                                                     data-waktu="{{ $soal->waktu }}"
-                                                                    data-image="{{ $soal->image_url }}">
+                                                                    data-image="{{ $soal->image_url }}"
+                                                                    data-status="{{ $soal->status }}"
+                                                                    >
                                                                     Edit
                                                                 </button>
 
@@ -165,6 +167,13 @@
                     <div class="form-group mt-3">
                         <label for="editDetik">Waktu dalam Detik</label>
                         <input type="number" id="editDetik" class="form-control" placeholder="Masukkan waktu dalam detik" min="1">
+                    </div>
+                    <div class="form-group mt-3">
+                        <label for="editStatus">Status Soal</label>
+                        <select id="editStatus" class="form-control">
+                            <option value="on">Aktif</option>
+                            <option value="off">Nonaktif</option>
+                        </select>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -219,17 +228,21 @@
             var id = button.data('id'); 
             var pertanyaan = button.data('pertanyaan');
             var waktu = button.data('waktu'); 
-            var image = button.data('image'); 
+            var image = button.data('image');
+            var status = button.data('status');  
 
             var modal = $(this);
             modal.find('#editId').val(id);
             modal.find('#editPertanyaan').val(pertanyaan);
             modal.find('#editDetik').val(waktu);
+            modal.find('#editStatus').val(status); 
             modal.find('#imagePreview').attr('src', image); 
 
             if (CKEDITOR.instances['editPertanyaan']) {
                 CKEDITOR.instances['editPertanyaan'].destroy();
             }
+
+            $('#editPertanyaan').val(pertanyaan);
 
             CKEDITOR.replace('editPertanyaan', {
                 extraPlugins: 'ckeditor_wiris',
@@ -246,6 +259,9 @@
                 image2_alignClasses: ['image-align-left', 'image-align-center', 'image-align-right'],
                 image2_disableResizer: false,
             });
+
+            CKEDITOR.instances['editPertanyaan'].setData(pertanyaan);
+
         });
     
         $('#saveChanges').click(function() {
@@ -254,6 +270,7 @@
             url = url.replace(':id', $('#editId').val());
 
             var waktu = $('#editDetik').val();
+            var status = $('#editStatus').val();
     
             $.ajax({
                 type: "POST",
@@ -262,6 +279,7 @@
                     _token: '{{ csrf_token() }}',
                     pertanyaan: CKEDITOR.instances['editPertanyaan'].getData(),
                     waktu: waktu,
+                    status: status,
                     _method: 'PUT'
                 },
                 success: function(response) {
@@ -329,8 +347,12 @@
             var previewContent = '';
             var soals = @json($soals); 
 
-            if (soals.length > 0) {
-                soals.forEach(function(soal, index) {
+            var soalOn = soals.filter(function(soal) {
+                return soal.status === 'on';
+            });
+
+            if (soalOn.length > 0) {
+                soalOn.forEach(function(soal, index) {
                     previewContent += `
                         <div class="mb-4">
                             <p><strong>Soal ${index + 1}</strong></p>
