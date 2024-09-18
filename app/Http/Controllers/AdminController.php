@@ -93,6 +93,7 @@ class AdminController extends Controller
             return Datatables::of($data)
                 ->addColumn('aksi', function ($row) {
                     return '
+                        <button class="btn btn-warning btn-sm edit-class font-weight-bold" data-id="' . $row->id . '" data-kelas="' . $row->id_kelas . '" data-sekolah="' . $row->nama_sekolah . '">Edit</button>
                         <button class="btn btn-danger btn-sm delete-class font-weight-bold" data-id="' . $row->id . '">Hapus</button>
                         <form id="delete-form-' . $row->id . '" action="' . url('/admin/kelas/hapus/' . $row->id) . '" method="POST" style="display: none;">
                             ' . csrf_field() . method_field('DELETE') . '
