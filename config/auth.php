@@ -117,6 +117,12 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+        'gurus' => [
+            'provider' => 'gurus',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
     ],
 
     /*

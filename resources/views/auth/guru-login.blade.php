@@ -48,7 +48,14 @@
                         </div>
 
                         <button type="submit" class="btn btn-primary btn-block">Login</button>
+
                     </form>
+
+                    <div class="text-center mt-3">
+                        <p>Login sebagai <a href="{{ route('siswa.login') }}">Siswa</a></p>
+                        <p>Belum punya akun? <a href="{{ route('guru.register') }}">Daftar sebagai Guru</a></p>
+                    </div>
+
                 </div>
             </div>
         </div>

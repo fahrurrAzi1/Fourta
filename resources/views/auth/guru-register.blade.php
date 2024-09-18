@@ -79,6 +79,11 @@
 
                         <button type="submit" class="btn btn-primary btn-block">Register</button>
                     </form>
+
+                    <div class="text-center mt-3">
+                        <p>Sudah punya akun ? <a href="{{ route('guru.login') }}">Login Guru</a></p>
+                    </div>
+
                 </div>
             </div>
         </div>
