@@ -1,6 +1,6 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- logo media -->
-    <a href="#" class="brand-link ml-2">
+    <a href="#" class="brand-link ml-2 text-decoration-none">
         <span class="brand-text font-weight-bold">{{ config('app.name', 'Laravel') }}</span>
     </a>
 
@@ -11,30 +11,30 @@
 
             @if (Auth::user()->role == 'admin')
                 <div class="info">
-                    <a href="#" class="d-block">Nama:&nbsp;
+                    <a href="#" class="d-block text-decoration-none">Nama:&nbsp;
                         {{ Auth::user()->name }}</a>
                 </div>
             @elseif (Auth::user()->role == 'guru')
                 <div class="info">
-                    <a href="#" class="d-block">Nama:&nbsp;
+                    <a href="#" class="d-block text-decoration-none">Nama:&nbsp;
                         {{ Auth::user()->name }}</a>
                 </div>
                 <div class="info">
-                    <a href="#" class="d-block">NIP:&nbsp;
+                    <a href="#" class="d-block text-decoration-none">NIP:&nbsp;
                         {{ Auth::user()->nip }}</a>
                 </div>  
             @elseif (Auth::user()->role == 'siswa')
                 
                 <div class="info">
-                    <a href="#" class="d-block font-weight-bold">
+                    <a href="#" class="d-block font-weight-bold text-decoration-none">
                             {{ Auth::user()->nama_sekolah }}</a>
                 </div>  
                 <div class="info">
-                    <a href="#" class="d-block">Nama:&nbsp;
+                    <a href="#" class="d-block text-decoration-none">Nama:&nbsp;
                         {{ Auth::user()->name }}</a>
-                    <a href="#" class="d-block">NIS:&nbsp;
+                    <a href="#" class="d-block text-decoration-none">NIS:&nbsp;
                             {{ Auth::user()->nis }}</a>
-                    <a href="#" class="d-block">Kelas:&nbsp;
+                    <a href="#" class="d-block text-decoration-none">Kelas:&nbsp;
                             {{ Auth::user()->kelass->id_kelas }}</a>
                 </div>  
             @endif
