@@ -312,6 +312,7 @@
             })
         });
 
+        // untuk submit pertanyaan
         $('#soalForm').on('submit', function(e) {
             e.preventDefault(); 
             
