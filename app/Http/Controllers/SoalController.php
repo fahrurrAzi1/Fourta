@@ -113,7 +113,9 @@ class SoalController extends Controller
 
     public function filter(Request $request)
     {
-        $kelass = Kelas::all();
+        $guruId = Auth::id();
+
+        $kelass = Kelas::where('guru_id', $guruId)->get();
 
         $jenis = $request->input('jenis', 'literasi'); 
         
