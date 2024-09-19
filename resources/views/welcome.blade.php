@@ -11,6 +11,7 @@
             height: 100vh;
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
 <div class="container-fluid center-container d-flex flex-column justify-content-center">
@@ -40,6 +41,11 @@
                     <a class="dropdown-item" href="{{ route('siswa.register') }}">Siswa</a>
                 </div>
             </div>
+
+            <a href="https://drive.google.com/drive/folders/1Bo3nrDj-Kv_FyVLJMDQASC9C4iEBiv3Q?usp=drive_link" target="_blank" class="btn btn-info ml-2">
+                <i class="fas fa-info-circle"></i> Panduan Penggunaan
+            </a>
+
         </div>
     </div>
 </div>
