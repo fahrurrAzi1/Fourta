@@ -15,6 +15,7 @@
                 <div class="jumbotron mt-4">
                     <h1>Welcome, {{ Auth::user()->name }}</h1>
                     @if($kelas && $kelas->guru)
+                        <h3 class="ml-1">NIS: {{ Auth::user()->nis }}</h3>
                         <p class="lead">Selamat Datang Siswa/Siswi Sekolah {{ $kelas->nama_sekolah }} di Kelas {{ $kelas->id_kelas }}, <br> Nama Pengajar : {{ $kelas->guru->name }}.</p>
                     @else
                         <p class="lead">Anda belum terdaftar di kelas mana pun.</p>

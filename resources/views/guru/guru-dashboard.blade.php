@@ -14,6 +14,7 @@
             <div class="col-md-12">
                 <div class="jumbotron mt-4">
                     <h1>Welcome, {{ Auth::user()->name }}</h1>
+                    <h3>NIP: {{ Auth::user()->nip }}</h3>
                     <p class="lead">Selamat datang di halaman dashboard guru.</p>
                 </div>
             </div>
