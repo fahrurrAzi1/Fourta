@@ -74,20 +74,20 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 
     <script>
+                         
+        var teacherId = "{{ $teacherId }}";
+
+        function loadScript(url) {
+            return new Promise((resolve, reject) => {
+                const script = document.createElement('script');
+                script.src = url;
+                script.onload = resolve;
+                script.onerror = reject;
+                document.head.appendChild(script);
+            });
+        }
 
         $(document).ready(function() {
-
-            var teacherId = "{{ $teacherId }}";
-
-            function loadScript(url) {
-                return new Promise((resolve, reject) => {
-                    const script = document.createElement('script');
-                    script.src = url;
-                    script.onload = resolve;
-                    script.onerror = reject;
-                    document.head.appendChild(script);
-                });
-            }
 
             var selectedJenis = '';
             var selectedKelas = '';
@@ -136,7 +136,24 @@
                         action: async function (e, dt, button, config) {
                             await loadScript('https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.3.0/exceljs.min.js');
                             
-                            const teacherData = await fetch(`/api/get-guru-data/${teacherId}`).then(response => response.json());
+                            const teacherData = await fetch(`/api/get-guru-data/${teacherId}`)
+                                                .then(response => {
+                                                    if (!response.ok) {
+                                                        throw new Error('Network response was not ok');
+                                                    }
+                                                    return response.text();  
+                                                })
+                                                .then(data => {
+                                                    try {
+                                                        return JSON.parse(data);  
+                                                    } catch (error) {
+                                                        console.error('Error parsing JSON:', error);
+                                                        throw error;  
+                                                    }
+                                                })
+                                                .catch(error => {
+                                                    console.error('Fetch error:', error);
+                                                });
 
                             const tableData = dt.buttons.exportData({
                                 columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,

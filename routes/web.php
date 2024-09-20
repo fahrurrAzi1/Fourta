@@ -111,7 +111,7 @@ Route::middleware(['auth:guru'])->group(function () {
     // mengambil data siswa di kelas
     Route::get('/guru/get-siswa-by-kelas', [GuruController::class, 'getSiswaByKelas'])->name('guru.get-siswa-by-kelas');
     // mengambil data untuk ekspor
-    Route::get('/api/get-guru-data', [GuruController::class, 'getGuruData']);
+    Route::get('/api/get-guru-data/{id}', [GuruController::class, 'getGuruData']);
 });
 
 // rute siswa
