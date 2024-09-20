@@ -383,7 +383,7 @@
                 const $buttons = $(`.update-score[data-id="${idSiswa}"][data-soal="${idSoal}"][data-type="${type}"]`);
 
                 Swal.fire({
-                    title: 'Anda yakin dengan pilihan ?',
+                    title: 'Anda yakin dengan pilihan?',
                     text: "Anda tidak bisa mengubah pilihan ini setelah menyimpan!",
                     icon: 'warning',
                     showCancelButton: true,
@@ -393,13 +393,6 @@
                     confirmButtonText: 'Iya'
                 }).then((result) => {
                     if (result.isConfirmed) {
-
-                        $buttons.each(function() {
-                            const idSiswa = $(this).data('id');
-                            const idSoal = $(this).data('soal');
-                            const type = $(this).data('type');
-                        });
-
                         $.ajax({
                             url: '{{ route('guru.update-skor-jawaban') }}',
                             method: 'POST',
@@ -417,8 +410,14 @@
                                     'success'
                                 );
 
-                                // disable dan ubah menjadi abu-abu
-                                $buttons.attr('disabled', true).removeClass('btn-success btn-danger').addClass('btn-secondary');
+                                $buttons.each(function() {
+                                    const buttonValue = $(this).data('value');
+                                    if (buttonValue === value) {
+                                        $(this).removeClass('btn-success btn-danger').addClass('btn-primary'); 
+                                    } else {
+                                        $(this).removeClass('btn-success btn-danger').addClass('btn-secondary'); 
+                                    }
+                                });
                             },
                             error: function(xhr) {
                                 console.error(xhr.responseText);
@@ -427,6 +426,7 @@
                     }
                 });
             });
+
 
             // kode alternatif
 
