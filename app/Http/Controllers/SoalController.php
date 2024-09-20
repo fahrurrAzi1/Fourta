@@ -281,7 +281,21 @@ class SoalController extends Controller
 
         $siswa = Siswa::find($validatedData['id_siswa']);
         $kelasId = $siswa->id_kelas;
-        
+
+        $soal = Soal::find($validatedData['id_soal']);
+        $jenis = $soal->jenis;
+
+        $lastSoalForSiswa = SkorJawaban::where('id_siswa', $validatedData['id_siswa'])
+            ->where('jenis', $jenis)
+            ->whereHas('soal', function ($query) {
+                $query->where('status', '!=', 'delete')
+                    ->where('status', '!=', 'off');
+            })
+            ->orderBy('nomor_soal', 'desc')
+            ->first();
+
+        $nomorSoal = $lastSoalForSiswa ? $lastSoalForSiswa->nomor_soal + 1 : 1;
+
         $komentar = Komentar::updateOrCreate(
             [
                 'id_siswa' => $validatedData['id_siswa'],
@@ -290,7 +304,7 @@ class SoalController extends Controller
             ],
             ['isi_komentar' => $validatedData['komentar']]
         );
-    
+
         $skor = SkorJawaban::firstOrCreate(
             [
                 'id_siswa' => $validatedData['id_siswa'],
@@ -303,7 +317,10 @@ class SoalController extends Controller
                 'skor_yakin_alasan' => 0,
                 'skor_akhir' => 0,
                 'kategori_skor' => 'Kurang Baik',
-                'id_komentar' => $komentar->id, 
+                'id_komentar' => $komentar->id,
+                'jenis' => $jenis, // Set jenis soal
+                'nomor_soal' => $nomorSoal, // Set nomor soal
+                'kelas_id' => $kelasId,
             ]
         );
     
