@@ -29,7 +29,6 @@ class CKEditorController extends Controller
         }
     }
 
-    // hapus gambar 
     public function delete($id)
     {
         $soal = Soal::find($id);
