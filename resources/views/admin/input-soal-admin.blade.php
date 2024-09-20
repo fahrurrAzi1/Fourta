@@ -314,18 +314,35 @@
 
         // untuk submit pertanyaan
         $('#soalForm').on('submit', function(e) {
+
             e.preventDefault(); 
-            
+
+            // ambil nilai input waktu
+            var waktu = $('#waktu').val();
+
+            // ambil nilai CKEditor untuk pertanyaan
             var pertanyaanContent = CKEDITOR.instances['pertanyaan'].getData().trim();
 
-            if (pertanyaanContent === '') {
+            // cek apakah waktu kosong atau <= 0
+            if (waktu === '' || waktu <= 0) {
+                Swal.fire({
+                    title: 'Waktu Tidak Valid!',
+                    text: 'Harap masukkan waktu yang lebih besar dari 0!',
+                    icon: 'warning',
+                    confirmButtonText: 'OK'
+                });
+            } 
+            // cek apakah pertanyaan kosong
+            else if (pertanyaanContent === '') {
                 Swal.fire({
                     title: 'Kolom Pertanyaan Kosong!',
                     text: 'Mohon isi kolom pertanyaan sebelum mengirimkan form.',
                     icon: 'warning',
                     confirmButtonText: 'OK'
                 });
-            } else {
+            } 
+            // jika semua validasi lolos
+            else {
                 Swal.fire({
                     title: 'Apakah kamu yakin?',
                     text: "Kamu akan mengirimkan pertanyaan ini.",
@@ -337,6 +354,7 @@
                     cancelButtonText: 'Batal'
                 }).then((result) => {
                     if (result.isConfirmed) {
+                        // kirim form jika konfirmasi berhasil
                         this.submit(); 
                     }
                 });
