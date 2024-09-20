@@ -302,6 +302,7 @@ class SoalController extends Controller
                 'skor_alasan' => 0,
                 'skor_yakin_alasan' => 0,
                 'skor_akhir' => 0,
+                'kategori_skor' => 'Kurang Baik',
                 'id_komentar' => $komentar->id, 
             ]
         );
