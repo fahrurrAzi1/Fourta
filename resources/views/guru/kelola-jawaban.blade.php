@@ -114,6 +114,26 @@
                                     </div>
                                 </div>
 
+                               <!-- Modal untuk menampilkan soal -->
+                                <div class="modal fade" id="soalModal" tabindex="-1" role="dialog" aria-labelledby="soalModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="soalModalLabel">Soal</h5>
+                                                <button type="button" class="close" onclick="$('#soalModal').modal('hide'); $('#jawabanModal').modal('show');" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body" id="modalSoalBody">
+                                                <!-- Isi soal akan dimasukkan di sini melalui jQuery -->
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" onclick="$('#soalModal').modal('hide'); $('#jawabanModal').modal('show');">Tutup</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </form>
                         </div>
                     </div>
@@ -190,8 +210,10 @@
                             data.forEach(function(item, index) {
                                 htmlContent += `
                                     <tr>
-                                        <td class="text-center">Soal ${index + 1}</td>
-                                        <td class="text-left">${item.jawaban_siswa}</td>
+                                        <td class="text-center">
+                                            <button class="btn btn-sm btn-info view-soal text-white" data-id_soal="${item.id_soal}" data-toggle="modal" data-target="#soalModal">Soal ${index + 1}</button>
+                                        </td>
+                                        <td class="text-center">${item.jawaban_siswa}</td>
                                         <td class="text-center">
                                             <button class="btn btn-sm btn-success update-score" data-type="skor_jawaban_siswa" data-id="${idSiswa}" data-soal="${item.id_soal}" data-value="1">Benar</button>
                                             <button class="btn btn-sm btn-danger mt-2 update-score" data-type="skor_jawaban_siswa" data-id="${idSiswa}" data-soal="${item.id_soal}" data-value="0">Salah</button>
@@ -263,7 +285,30 @@
                 });
             });
 
-        
+            // fungsi untuk memanggil soal 
+
+            $(document).on('click', '.view-soal', function(event) {
+                event.preventDefault(); 
+                $('#jawabanModal').modal('hide');
+                const idSoal = $(this).data('id_soal');
+
+                $.ajax({
+                    url: `/get-soal/${idSoal}`, 
+                    method: 'GET',
+                    success: function(response) {
+
+                        $('#modalSoalBody').html(`
+                            <p>${response.pertanyaan}</p>
+                        `);
+
+                        $('#soalModal').modal('show'); 
+                    },
+                    error: function(xhr, status, error) {
+                        console.log('Error:', error);
+                    }
+                });
+            });
+
             // fugnsi untuk memberikan komentar
 
             $(document).on('click', '.comment-button', function(event) {

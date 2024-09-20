@@ -187,6 +187,15 @@ class SoalController extends Controller
         return view('siswa.isi-soal', compact('soals'));
     }
 
+    // tampilkan soal pada kelola jawaban
+
+    public function show($id) {
+        $soal = Soal::find($id);
+        if (!$soal) {
+            return response()->json(['error' => 'Soal tidak ditemukan'], 404);
+        }
+        return response()->json($soal);
+    }
 
     // kode untuk update kelola jawaban di halaman guru
 
