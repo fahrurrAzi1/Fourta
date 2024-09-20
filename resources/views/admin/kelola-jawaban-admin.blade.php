@@ -190,7 +190,7 @@
                             data.forEach(function(item, index) {
                                 htmlContent += `
                                     <tr>
-                                        <td class="text-center">${index + 1}</td>
+                                        <td class="text-center">Soal ${index + 1}</td>
                                         <td class="text-left">${item.jawaban_siswa}</td>
                                         <td class="text-center">
                                             <button class="btn btn-sm btn-success update-score" data-type="skor_jawaban_siswa" data-id="${idSiswa}" data-soal="${item.id_soal}" data-value="1">Benar</button>
