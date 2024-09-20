@@ -74,185 +74,20 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 
     <script>
-        // alternatif kode
-        
-        // $(document).ready(function() {
-
-        //     var selectedJenis = '';
-
-        //     var selectedKelas = '';
-
-            
-        //     $.getJSON("{{ route('datatable.results') }}", function(response) {
-        //         var labels = [];
-        //         var data = [];
-        //         var categories = [];
-        //         var colors = [];
-        //         var kelas = [];
-
-        //         response.data.forEach(function(row) {
-        //             labels.push(row.nama);  
-        //             data.push(parseInt(row.skor_total));   
-        //             categories.push(row.kategori_skor);  
-        //             colors.push(getRandomColor());  
-        //             kelas.push(row.kelas);
-        //         });
-
-        //         updateChart(labels, data,  categories, colors, kelas);
-        //     });
-
-        //     var table = $('#presentaseTable').DataTable({
-        //         processing: true,
-        //         serverSide: true,
-        //         ajax: {
-        //             url: "{{ route('datatable.results') }}",
-        //             data: function (d) {
-        //                 d.jenis = selectedJenis;
-        //                 d.kelas = selectedKelas; 
-        //             },
-        //         },
-        //         columns: [
-        //             { data: 'no', name: 'no' },
-        //             { data: 'nama', name: 'nama' },
-        //             { data: 'jenis', name: 'jenis'},
-        //             { data: 'sekolah', name: 'sekolah'},
-        //             { data: 'kelas', name: 'kelas' },
-        //             @for ($i = 1; $i <= 10; $i++)
-        //                 { data: 'q{{ $i }}_I', name: 'q{{ $i }}_I' },
-        //                 { data: 'q{{ $i }}_II', name: 'q{{ $i }}_II' },
-        //                 { data: 'q{{ $i }}_III', name: 'q{{ $i }}_III' },
-        //                 { data: 'q{{ $i }}_IV', name: 'q{{ $i }}_IV' },
-        //             @endfor
-        //             { data: 'komentar', name: 'komentar' },
-        //             { data: 'skor_total', name: 'skor_total' },
-        //             { data: 'kategori_skor', name: 'kategori_skor' },
-        //         ],
-        //         dom: "<'row'<'col-sm-12 col-md-6 mb-2'lB><'col-sm-12 col-md-6'f>>" + 
-        //             "<'row'<'col-sm-12'tr>>" + 
-        //             "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
-        //         buttons: [
-        //             {
-        //                 extend: 'excelHtml5',
-        //                 text: '<i class="fas fa-file-excel"></i>&nbsp;Excel',
-        //                 className: 'btn btn-sm btn-outline-success',
-        //                 titleAttr: 'Ekspor ke Excel',
-        //             },
-        //             {
-        //                 extend: 'pdfHtml5',
-        //                 text: '<i class="fas fa-file-pdf"></i>&nbsp;PDF',
-        //                 className: 'btn btn-sm btn-outline-danger',
-        //                 titleAttr: 'Ekspor ke PDF',
-        //                 orientation: 'landscape',
-        //                 pageSize: 'A4',
-        //             },
-        //         ],
-        //         initComplete: function () {
-        //             $('div.dataTables_filter input').addClass('form-control');
-        //             $('div.dataTables_length').addClass('d-flex align-items-center');
-        //             $('div.dataTables_filter').addClass('d-flex justify-content-end align-items-center');
-
-        //             $('div.dataTables_length').append(`
-        //                 <div class="ml-3 mb-2 p-2">
-        //                     <label for="jenisSelect" class="form-label">Pilih Jenis:</label>
-        //                     <select id="jenisSelect" class="p-2 form-select btn-warning rounded text-bold">
-        //                         <option value="">Semua Jenis</option>
-        //                         <option value="literasi">Literasi</option>
-        //                         <option value="numerasi">Numerasi</option>
-        //                     </select>
-        //                 </div>
-        //                 <div class="ml-3 mb-2 p-2">
-        //                     <label for="kelasSelect" class="form-label">Pilih Kelas:</label>
-        //                     <select id="kelasSelect" class="p-2 form-select btn-primary rounded text-bold">
-        //                         <option value="">Semua Kelas</option>
-        //                         @foreach($kelass as $kelas)
-        //                             <option value="{{ $kelas->id_kelas }}">{{ $kelas->id_kelas }} - {{ $kelas->nama_sekolah }}</option>
-        //                         @endforeach
-        //                     </select>
-        //                 </div>
-        //                 <div class="ml-3 mb-2">
-        //                     <button type="button" class="btn btn-success text-bold" id="applyFilter"><p class="text-bold mb-0">Terapkan Filter</p></button>
-        //                 </div>
-        //             `);
-
-        //             $('#applyFilter').click(function() {
-        //                 selectedJenis = $('#jenisSelect').val();
-        //                 selectedKelas = $('#kelasSelect').val();
-        //                 applyFilters();
-        //             });
-
-        //             function applyFilters() {
-        //                 table.column('jenis:name').search(selectedJenis);
-        //                 table.column('kelas:name').search(selectedKelas);
-        //                 table.draw();
-        //             }
-        //         }
-        //     });
-
-        //     function updateChart(labels, data, categories, colors, kelas) {
-        //         var ctx = document.getElementById('hasilSiswaChart').getContext('2d');
-        //         if (window.siswaChart) {
-        //             window.siswaChart.destroy();
-        //         }
-        //         window.siswaChart = new Chart(ctx, {
-        //             type: 'pie',
-        //             data: {
-        //                 labels: labels, 
-        //                 datasets: [{
-        //                     label: 'Total Skor Siswa',
-        //                     data: data, 
-        //                     backgroundColor: colors, 
-        //                     borderColor: colors,
-        //                     borderWidth: 1
-        //                 }]
-        //             },
-        //             options: {
-        //                 scales: {
-        //                     y: {
-        //                         beginAtZero: true
-        //                     }
-        //                 },
-        //                 plugins: {
-        //                     tooltip: {
-        //                         callbacks: {
-        //                             label: function(tooltipItem) {
-        //                                 var index = tooltipItem.dataIndex;
-        //                                 return [
-        //                                     'Nama: ' + labels[index],
-        //                                     'Kelas: ' + kelas[index],
-        //                                     'Total Skor: ' + data[index],
-        //                                     'Kategori: ' + categories[index], 
-        //                                 ];
-        //                             }
-        //                         }
-        //                     }
-        //                 }
-        //             }
-        //         });
-        //     }
-
-        //     function getRandomColor() {
-        //         var letters = '0123456789ABCDEF';
-        //         var color = '#';
-        //         for (var i = 0; i < 6; i++) {
-        //             color += letters[Math.floor(Math.random() * 16)];
-        //         }
-        //         return color;
-        //     }
-        // });
-        
-        var teacherId = "{{ $teacherId }}";
-
-        function loadScript(url) {
-            return new Promise((resolve, reject) => {
-                const script = document.createElement('script');
-                script.src = url;
-                script.onload = resolve;
-                script.onerror = reject;
-                document.head.appendChild(script);
-            });
-        }
 
         $(document).ready(function() {
+
+            var teacherId = "{{ $teacherId }}";
+
+            function loadScript(url) {
+                return new Promise((resolve, reject) => {
+                    const script = document.createElement('script');
+                    script.src = url;
+                    script.onload = resolve;
+                    script.onerror = reject;
+                    document.head.appendChild(script);
+                });
+            }
 
             var selectedJenis = '';
             var selectedKelas = '';
