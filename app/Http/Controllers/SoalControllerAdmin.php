@@ -148,6 +148,16 @@ class SoalControllerAdmin extends Controller
 
     // kode untuk update kelola jawaban di halaman guru
 
+        // tampilkan soal pada kelola jawaban
+
+    public function show($id) {
+        $soal = Soal::find($id);
+        if (!$soal) {
+            return response()->json(['error' => 'Soal tidak ditemukan'], 404);
+        }
+        return response()->json($soal);
+    }
+
     public function updateSkorJawaban(Request $request)
     {
         $validatedData = $request->validate([

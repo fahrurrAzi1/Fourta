@@ -114,6 +114,26 @@
                                     </div>
                                 </div>
 
+                                <!-- Modal untuk menampilkan soal -->
+                                <div class="modal fade" id="soalModalAdmin" tabindex="-1" role="dialog" aria-labelledby="soalModalAdminLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="soalModalLabel">Soal</h5>
+                                                <button type="button" class="close" onclick="$('#soalModalAdmin').modal('hide'); $('#jawabanModal').modal('show');" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body" id="modalSoalBody">
+                                                
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" onclick="$('#soalModalAdmin').modal('hide'); $('#jawabanModal').modal('show');">Tutup</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </form>
                         </div>
                     </div>
@@ -190,7 +210,9 @@
                             data.forEach(function(item, index) {
                                 htmlContent += `
                                     <tr>
-                                        <td class="text-center">${index + 1}</td>
+                                        <td class="text-center">
+                                            <button class="btn btn-sm btn-info view-soal-admin text-white" data-id_soal="${item.id_soal}" data-toggle="modal" data-target="#soalModalAdmin">Soal ${index + 1}</button>
+                                        </td>
                                         <td class="text-left">${item.jawaban_siswa}</td>
                                         <td class="text-center">
                                             <button class="btn btn-sm btn-success update-score" data-type="skor_jawaban_siswa" data-id="${idSiswa}" data-soal="${item.id_soal}" data-value="1">Benar</button>
@@ -263,6 +285,29 @@
                 });
             });
 
+             // fungsi untuk memanggil soal 
+
+             $(document).on('click', '.view-soal-admin', function(event) {
+                event.preventDefault(); 
+                $('#jawabanModal').modal('hide');
+                const idSoal = $(this).data('id_soal');
+
+                $.ajax({
+                    url: `/get-soal-admin/${idSoal}`, 
+                    method: 'GET',
+                    success: function(response) {
+
+                        $('#modalSoalBody').html(`
+                            <p>${response.pertanyaan}</p>
+                        `);
+
+                        $('#soalModalAdmin').modal('show'); 
+                    },
+                    error: function(xhr, status, error) {
+                        console.log('Error:', error);
+                    }
+                });
+            });
         
             // fugnsi untuk memberikan komentar
 

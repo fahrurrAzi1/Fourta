@@ -65,6 +65,8 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::get('/admin/get-siswa-by-kelas', [AdminController::class, 'getSiswaByKelas'])->name('admin.get-siswa-by-kelas');
     // mengambil data untuk ekspor
     Route::get('/api/get-admin-data/{id}', [AdminController::class, 'getAdminData']);
+    // kelola soal
+    Route::get('/get-soal-admin/{id}', [SoalControllerAdmin::class, 'show']);
 });
 
 
