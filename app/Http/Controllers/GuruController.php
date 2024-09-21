@@ -142,7 +142,8 @@ class GuruController extends Controller
         $jenis = $request->input('jenis');
 
         $hasil =  Hasil::whereHas('soal', function ($query) use ($jenis) {
-                    $query->where('jenis', $jenis);
+                    $query->where('jenis', $jenis)
+                          ->where('status', '!=', 'off'); 
                 })
                 ->whereHas('siswa', function ($query) use ($idSiswa) {
                     $query->where('id_siswa', $idSiswa);
