@@ -42,6 +42,7 @@
                                     <th>Kelas</th>
                                     <th>Sekolah</th>
                                     <th>Nama Guru</th>
+                                    <th>Jumlah Siswa</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -104,6 +105,7 @@
                     {data: 'id_kelas', name: 'id_kelas'},
                     {data: 'nama_sekolah', name: 'nama_sekolah'},
                     {data: 'guru.name', name: 'guru.name'},
+                    {data: 'jumlah_siswa', name: 'jumlah_siswa', title: 'Jumlah Siswa'},
                     {data: 'aksi', name: 'aksi'},
                 ],
                 initComplete: function () {

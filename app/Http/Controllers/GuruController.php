@@ -96,7 +96,11 @@ class GuruController extends Controller
         $kelass = Kelas::where('guru_id', $guruId)->get();
 
         if ($request->ajax()) {
-            $data = Kelas::with('guru')->where('guru_id', $guruId)->get();
+            $data = Kelas::with('guru')
+                    ->withCount('siswas')
+                    ->where('guru_id', $guruId)
+                    ->get();
+
             return Datatables::of($data)
                 ->addColumn('aksi', function ($row) {
                     return '
@@ -106,6 +110,9 @@ class GuruController extends Controller
                             ' . csrf_field() . method_field('DELETE') . '
                         </form>
                     ';
+                })
+                ->addColumn('jumlah_siswa', function($row) {
+                    return $row->siswas_count;
                 })
                 ->rawColumns(['aksi'])
                 ->make(true);

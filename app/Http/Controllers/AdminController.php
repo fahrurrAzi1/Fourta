@@ -89,7 +89,10 @@ class AdminController extends Controller
         $kelass = Kelas::all();
 
         if ($request->ajax()) {
-            $data = Kelas::with('guru')->get();
+            $data = Kelas::with('guru')
+                    ->withCount('siswas')
+                    ->where('guru_id', $kelass)
+                    ->get();
             return Datatables::of($data)
                 ->addColumn('aksi', function ($row) {
                     return '
@@ -99,6 +102,9 @@ class AdminController extends Controller
                             ' . csrf_field() . method_field('DELETE') . '
                         </form>
                     ';
+                })
+                ->addColumn('jumlah_siswa', function($row) {
+                    return $row->siswas_count;
                 })
                 ->rawColumns(['aksi'])
                 ->make(true);
