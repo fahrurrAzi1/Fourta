@@ -220,13 +220,16 @@ class SoalController extends Controller
         $lastSoalForSiswa = SkorJawaban::where('id_siswa', $validatedData['id_siswa'])
                             ->where('jenis', $jenis)
                             ->whereHas('soal', function ($query) {
-                                $query->where('status', '!=', 'delete')  
-                                    ->where('status', '!=', 'off');    
+                                $query ->where('status', '!=', 'off');    
                             })
                             ->orderBy('nomor_soal', 'desc')
                             ->first();
 
         $nomorSoal = $lastSoalForSiswa ? $lastSoalForSiswa->nomor_soal + 1 : 1;
+
+        if ($nomorSoal > 10) {
+            $nomorSoal = 0;
+        }
 
         $skor = SkorJawaban::firstOrCreate(
             ['id_siswa' => $validatedData['id_siswa'], 'id_soal' => $validatedData['id_soal'],'jenis' => $jenis],
