@@ -532,10 +532,10 @@ class SoalController extends Controller
                 for ($i = 1; $i <= 10; $i++) {
 
                     // definisikan untuk setiap skor
-                    $skorJawabanSiswa = $row->where('id_soal', $i)->first()->skor_jawaban_siswa ?? 0;
-                    $skorYakinJawaban = $row->where('id_soal', $i)->first()->skor_yakin_jawaban ?? 0;
-                    $skorAlasan = $row->where('id_soal', $i)->first()->skor_alasan ?? 0;
-                    $skorYakinAlasan = $row->where('id_soal', $i)->first()->skor_yakin_alasan ?? 0;
+                    $skorJawabanSiswa = $row->where('nomor_soal', $i)->first()->skor_jawaban_siswa ?? 0;
+                    $skorYakinJawaban = $row->where('nomor_soal', $i)->first()->skor_yakin_jawaban ?? 0;
+                    $skorAlasan = $row->where('nomor_soal', $i)->first()->skor_alasan ?? 0;
+                    $skorYakinAlasan = $row->where('nomor_soal', $i)->first()->skor_yakin_alasan ?? 0;
 
                     // persamaan untuk skor jawaban dan skor yakin jawaban
                     if ($skorJawabanSiswa == 0 && $skorYakinJawaban == 1) {
@@ -575,10 +575,10 @@ class SoalController extends Controller
                 for ($i = 1; $i <= 10; $i++) {
 
                     // definisikan untuk setiap skor
-                    $skorJawabanSiswa = $row->where('id_soal', $i)->first()->skor_jawaban_siswa ?? 0;
-                    $skorYakinJawaban = $row->where('id_soal', $i)->first()->skor_yakin_jawaban ?? 0;
-                    $skorAlasan = $row->where('id_soal', $i)->first()->skor_alasan ?? 0;
-                    $skorYakinAlasan = $row->where('id_soal', $i)->first()->skor_yakin_alasan ?? 0;
+                    $skorJawabanSiswa = $row->where('nomor_soal', $i)->first()->skor_jawaban_siswa ?? 0;
+                    $skorYakinJawaban = $row->where('nomor_soal', $i)->first()->skor_yakin_jawaban ?? 0;
+                    $skorAlasan = $row->where('nomor_soal', $i)->first()->skor_alasan ?? 0;
+                    $skorYakinAlasan = $row->where('nomor_soal', $i)->first()->skor_yakin_alasan ?? 0;
 
                     // persamaan untuk skor jawaban dan skor yakin jawaban
                     if ($skorJawabanSiswa == 0 && $skorYakinJawaban == 1) {
