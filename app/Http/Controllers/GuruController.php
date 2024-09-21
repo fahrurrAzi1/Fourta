@@ -82,9 +82,13 @@ class GuruController extends Controller
 
         $kelass = Kelas::where('guru_id', $guruId)->get();
 
+        $kelasIds = $kelass->pluck('id'); 
+
         $jenis = $request->input('jenis', 'literasi'); 
-    
-        $soals = Soal::where('jenis', $jenis)->get();
+
+        $soals = Soal::where('jenis', $jenis)
+                    ->whereIn('kelas_id', $kelasIds)
+                    ->get();
     
         return view('guru.input-soal', compact('soals', 'kelass'));
     }
