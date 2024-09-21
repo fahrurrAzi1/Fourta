@@ -125,7 +125,7 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body" id="modalSoalBody">
-                                                <!-- Isi soal akan dimasukkan di sini melalui jQuery -->
+                                                
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" onclick="$('#soalModal').modal('hide'); $('#jawabanModal').modal('show');">Tutup</button>
