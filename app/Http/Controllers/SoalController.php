@@ -539,11 +539,13 @@ class SoalController extends Controller
 
                     // persamaan untuk skor jawaban dan skor yakin jawaban
                     if ($skorJawabanSiswa == 0 && $skorYakinJawaban == 1) {
+                            $skorJawabanSiswa = 0;
                             $skorYakinJawaban = -1;
                     }
 
                     // persamaan untuk skor alasan dan skor yakin alasan
                     if ($skorAlasan == 0 && $skorYakinAlasan == 1) {
+                        $skorAlasan = 0;
                         $skorYakinAlasan = -1;
                     }
 
@@ -554,6 +556,8 @@ class SoalController extends Controller
 
                 // kembalikan nilai nya
                 $skorAkhir = ($totalSkor / 40) * 100;
+
+                $skorAkhir = max(0, $skorAkhir);
 
                 // update skor_akhir ke database
                 foreach ($row as $item) {
