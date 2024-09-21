@@ -91,7 +91,6 @@ class AdminController extends Controller
         if ($request->ajax()) {
             $data = Kelas::with('guru')
                     ->withCount('siswas')
-                    ->where('guru_id', $kelass)
                     ->get();
             return Datatables::of($data)
                 ->addColumn('aksi', function ($row) {
