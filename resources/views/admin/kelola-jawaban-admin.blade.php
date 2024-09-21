@@ -418,7 +418,14 @@
                                 );
 
                                 // disable dan ubah menjadi abu-abu
-                                $buttons.attr('disabled', true).removeClass('btn-success btn-danger').addClass('btn-secondary');
+                                $buttons.each(function() {
+                                    const buttonValue = $(this).data('value');
+                                    if (buttonValue === value) {
+                                        $(this).removeClass('btn-success btn-danger').addClass('btn-primary'); 
+                                    } else {
+                                        $(this).removeClass('btn-success btn-danger').addClass('btn-secondary'); 
+                                    }
+                                });
                             },
                             error: function(xhr) {
                                 console.error(xhr.responseText);
