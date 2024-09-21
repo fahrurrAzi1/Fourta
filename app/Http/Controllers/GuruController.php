@@ -108,6 +108,7 @@ class GuruController extends Controller
             return Datatables::of($data)
                 ->addColumn('aksi', function ($row) {
                     return '
+                        <button class="btn btn-info btn-sm view-students font-weight-bold" data-id="' . $row->id . '">Lihat Siswa</button>
                         <button class="btn btn-warning btn-sm edit-class font-weight-bold" data-id="' . $row->id . '" data-kelas="' . $row->id_kelas . '" data-sekolah="' . $row->nama_sekolah . '">Edit</button>
                         <button class="btn btn-danger btn-sm delete-class font-weight-bold" data-id="' . $row->id . '">Hapus</button>
                         <form id="delete-form-' . $row->id . '" action="' . url('/guru/kelas/hapus/' . $row->id) . '" method="POST" style="display: none;">
@@ -157,6 +158,16 @@ class GuruController extends Controller
 
         return view('guru.kelola-jawaban', compact('hasil','kelass','siswas'));
     }
+
+    public function getSiswaByKelas1($id)
+    {
+        $siswas = Siswa::with('kelass')
+                    ->where('id_kelas', $id)
+                    ->get();
+
+        return response()->json(['siswas' => $siswas]);
+    }
+
 
     public function getSiswaByKelas(Request $request)
     {

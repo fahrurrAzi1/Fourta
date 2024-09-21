@@ -116,6 +116,8 @@ Route::middleware(['auth:guru'])->group(function () {
     Route::get('/api/get-guru-data/{id}', [GuruController::class, 'getGuruData']);
     //kode untuk preview soal di kelola jawaban
     Route::get('/get-soal/{id}', [SoalController::class, 'show']);
+    // menambahkan untuk kelas
+    Route::get('guru/kelas/siswa/{id}', [GuruController::class, 'getSiswaByKelas1']);
 });
 
 // rute siswa

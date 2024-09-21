@@ -81,6 +81,37 @@
         </div>
     </div>    
 
+    <!-- Modal for Viewing Students -->
+    <div class="modal fade" id="studentsModal" tabindex="-1" aria-labelledby="studentsModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="studentsModalLabel">Daftar Siswa</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-bordered" id="studentsTable">
+                        <thead>
+                            <tr>
+                                <th class="text-center">No</th>
+                                <th class="text-center">Nama</th>
+                                <th class="text-center">Kelas</th>
+                                <th class="text-center">Sekolah</th>
+                                <th class="text-center">NIS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <!-- Skrip jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
@@ -120,6 +151,38 @@
                     `);
 
                 }
+            });
+
+            $(document).on('click', '.view-students', function() {
+                var kelasId = $(this).data('id');
+
+                $.ajax({
+                    url: '/guru/kelas/siswa/' + kelasId,
+                    type: 'GET',
+                    success: function(response) {
+                        var tableBody = $('#studentsTable tbody');
+                        tableBody.empty();  
+
+                        let index = 1; 
+
+                        response.siswas.forEach(function(siswas) {
+                            tableBody.append(`
+                                <tr>
+                                    <td class="text-center">${index++}</td>
+                                    <td class="text-center">${siswas.name}</td>
+                                    <td class="text-center">${siswas.kelass.id_kelas}</td>
+                                    <td class="text-center">${siswas.nama_sekolah}</td>
+                                    <td class="text-center">${siswas.nis}</td>
+                                </tr>
+                            `);
+                        });
+
+                        $('#studentsModal').modal('show');
+                    },
+                    error: function() {
+                        alert('Gagal mengambil data siswa');
+                    }
+                });
             });
 
             $(document).on('click', '#tambahKelasBtn', function() {
