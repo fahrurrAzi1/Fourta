@@ -16,7 +16,7 @@
 <body>
 <div class="container-fluid center-container d-flex flex-column justify-content-center">
     <h2 class="font-weight-bold">Four Tier Assessment</h2>
-    <img src="{{ asset('images/bgawal.svg') }}" alt="Header Image" class="img-fluid w-100 rounded">
+    <img src="{{ asset('images/bgwelcome.svg') }}" alt="Header Image" class="img-fluid w-100 rounded">
     <div class="row justify-content-center mt-4">
         <div class="col-md-6 text-center">
             <div class="btn-group">
